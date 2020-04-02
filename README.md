@@ -317,11 +317,11 @@ CONSOLE Log:
 
 Note that the traceId, spanId and parent spanId details are logged. Notice the relationship.
 
-FILE log (span.log)
+FILE (span.log)
 
 ```
 {"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"dDgzj1o98xBpP6nt","references":[ {"type":"child_of","spanId":"KTXsB8YG41MOGrMO"}],"operation":"createEmployee","start":726296232442,"end":726296232635}
-{"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"KTXsB8YG41MOGrMO","references":[ {"type":"child_of","spanId":"lmKQNyfPe7chHojZ"}],"operation":"createEmployee","start":726296231932,"end":726296234088}
+{"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"KTXsB8YG41MOGrMO","references":[ {"type":"child_of","spanId":"lmKQNyfPe7chHojZ"}],"operation":"createDepartment","start":726296231932,"end":726296234088}
 {"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"lmKQNyfPe7chHojZ","operation":"main","start":726296185318,"end":726296234222}
 
 ```
