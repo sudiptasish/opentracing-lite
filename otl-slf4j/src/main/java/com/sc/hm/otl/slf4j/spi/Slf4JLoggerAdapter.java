@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Slf4JLoggerAdapter implements LoggerAdapter {
     
-    private final Logger logger = LoggerFactory.getLogger(Slf4JLoggerAdapter.class);
+    private final Logger logger = LoggerFactory.getLogger("otl.span.log");
 
     @Override
     public void log(String msg) {
