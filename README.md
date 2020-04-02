@@ -41,7 +41,10 @@ It exposes a set of MBeans to monitor the span creation, scope activation/deacti
 ## Schema less
 Opentracing-LiTE does not have a schema on it's own. It does not enforce it either. It relies on the format defined by the developer. There are few reasons for that. Main reason being, it always tries to be developer-friendly. A developer who used to see the logs in the plain text format, should not be forced to switch to a different format, like xml of json. As it may hinder the visibility. 
 
-Opentracing-LiTE, on the other side give developers the freedom to choose the schema and/or format thet want to define, and start logging in prescribed format. However, note that schema enforcement may come in a later version.
+Opentracing-LiTE, on the other side give developers the freedom to choose the schema and/or format thet want to define, and start logging in prescribed format.
+
+## Easy segregation of log and span
+It enables easy segregation of **log** and **span** data, by redirecting them to different log files. The regular log data, which is mainly in plain text format, can be sent to **splunk** which is the most efficient log aggregator tool as of today. The span data, which gets generated in **json** format, can be sent to other storage (e.g., **elasticsearch**) where they can be indexed and queried later to view span graph. That is another reason as to why opentracing-lite is schema less today.
 
 ## Libraries for popular framework
 It provides the ready-made libraries for popular framework.
@@ -122,14 +125,25 @@ Imagine you have a standalone java application, that uses SLF4J compliant logger
             <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] [%X{trc}] [%X{spn}] [%X{pspn}] [%X{bgi}] %-5relative %-5level %logger{36} - %msg %n</pattern>
         </encoder>
     </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>span.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg %n</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="otl.span.log" level="INFO" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>
 
-
 ```
+Note that the special **logger** "otl.span.log", which uses FILE appender to write the messages to **span.log**. At the end, this file will have only the span data. And regular log data can be sent to other file (here redirected to CONSOLE).
 
 Apart from the regular pattern, 4 new attributes were added:
 - trc : Will print the traceId, if present
@@ -291,20 +305,28 @@ java -javaagent:/path/to/otl-agent-1.0-SNAPSHOT.jar -classpath <classpath_entrie
 
 ```
 
-It will print the below logs:
+CONSOLE Log:
 
 ```
-2020-04-02_23:45:38.487 [main] [] [] [] [] 112   INFO  com.sc.hm.test_app.Registration - Starting employee registration 
-2020-04-02_23:45:38.536 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vPowsc33TaPxmsMZ] [l0sKxjqpWPiGbogD] [] 161   INFO  com.sc.hm.test_app.Registration - Employee created successfully 
-2020-04-02_23:45:38.536 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vLLqLvvU2WvgYCFM] [vPowsc33TaPxmsMZ] [] 161   INFO  com.sc.hm.test_app.Registration - Department created successfully 
-2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vPowsc33TaPxmsMZ] [l0sKxjqpWPiGbogD] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"vLLqLvvU2WvgYCFM","references":[ {"type":"child_of","spanId":"vPowsc33TaPxmsMZ"}],"operation":"createEmployee","start":717078838022,"end":717078838205} 
-2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [l0sKxjqpWPiGbogD] [] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"vPowsc33TaPxmsMZ","references":[ {"type":"child_of","spanId":"l0sKxjqpWPiGbogD"}],"operation":"createEmployee","start":717078837604,"end":717078839618} 
-2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [l0sKxjqpWPiGbogD] [] [] 163   INFO  com.sc.hm.test_app.Registration - Employee registration is complete 
-2020-04-02_23:45:38.538 [main] [] [] [] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"l0sKxjqpWPiGbogD","operation":"main","start":717078791089,"end":717078839711}
+2020-04-03_02:00:26.232 [main] [] [] [] [] 122   INFO  com.sc.hm.test_app.Registration - Starting employee registration 
+2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [EPAJ2GPdfTccdK92] [0lSiHNkZMIHygAvm] [] 174   INFO  com.sc.hm.test_app.Registration - Employee created successfully 
+2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [zD5KhTynBuBW8dEP] [EPAJ2GPdfTccdK92] [] 174   INFO  com.sc.hm.test_app.Registration - Department created successfully 
+2020-04-03_02:00:26.286 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [0lSiHNkZMIHygAvm] [] [] 176   INFO  com.sc.hm.test_app.Registration - Employee registration is complete
 
 ```
 
 Note that the traceId, spanId and parent spanId details are logged. Notice the relationship.
+
+FILE log (span.log)
+
+```
+{"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"dDgzj1o98xBpP6nt","references":[ {"type":"child_of","spanId":"KTXsB8YG41MOGrMO"}],"operation":"createEmployee","start":726296232442,"end":726296232635}
+{"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"KTXsB8YG41MOGrMO","references":[ {"type":"child_of","spanId":"lmKQNyfPe7chHojZ"}],"operation":"createEmployee","start":726296231932,"end":726296234088}
+{"traceId":"VJrpXmWr59zFx5lKMXOrt2rN3xFfTQO4","spanId":"lmKQNyfPe7chHojZ","operation":"main","start":726296185318,"end":726296234222}
+
+```
+
+So the span log is segregated. Note that it is generated in json format. Wheareas log data continues to generate in existing (plain text) format.
 
 # Appendix A
 
