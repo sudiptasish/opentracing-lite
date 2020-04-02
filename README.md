@@ -36,7 +36,7 @@ Out of these, log4j2 and logback are stable framework, as they follow the standa
 Opentracing-Lite provides upfront support for all logging frameworks that are currently compliant with SLF4J. For other non-compliant logging framework, one has to write an adapter, and that, too, is very simple.
 
 ## Rich set of metrics
-It exposes a set of MBeans to monitor the span creation, scope activation/deactivation, etc. User can monitor the behavior of the framework via any management console. There are other metrics currently being built that will give developer an idea about the trend. Note that, all these metrics are transient, that means, once you restart your app, you chance to loose these metrics. I may consider persisting these metrics, but currently that is out of scope.
+It exposes a set of MBeans to monitor the span creation, scope activation/deactivation, etc. User can monitor the behavior of the framework via any management console. There are other metrics currently being built that will give developer an idea about the trend. Note that, all these metrics are transient, that means, once you restart your app, you chance to loose these metrics. I may consider persisting these metrics, but currently that is out of scope. See Appendix B for list of metrics.
 
 ## Schema less
 Opentracing-LiTE does not have a schema on it's own. It does not enforce it either. It relies on the format defined by the developer. There are few reasons for that. Main reason being, it always tries to be developer-friendly. A developer who used to see the logs in the plain text format, should not be forced to switch to a different format, like xml of json. As it may hinder the visibility. 
@@ -46,5 +46,260 @@ Opentracing-LiTE, on the other side give developers the freedom to choose the sc
 ## Libraried for popular framework
 It provides the ready-made libraries for popular framework.
 
+# Modules
+
+Below are the core modules:
+
+## otl-core
+This contains the core library and specification for various providers. You will most of the time be using this module for tracing.
+
+## otl-util
+This library contains some utility classes used by the above modules , plus other modules as well.
+
+## otl-metrics
+It contains the mbeans for capturing various metrics and exposing them via standard jmx console. It's not mandatory to use this module. Should a developer is interested in capturing the metricss, include this module.
+
+## otl-agent
+Opentracing-LiTE leverages the opentracing-util's GlobalTracer to store the platform provided tracer. The platform tracer has to be initialized first before it can be used. Now, an application can have multiple entry points, e.g., a web application might be initialized either through a servlet or through a context listener. A spring boot application has a different entry point for startup, a typical messaging system can have another entry point. It is not possible to provide a hook for every single app. Hence it is decided to instantiate and load the platfor tracer via standard java agent. The otl-agent takes care of initializing your tracer, registering various MBeans with underlying platform MBean server, etc.
+
+## otl-slf4j
+If your application is using some SLF4J compliant logging framework, you need this library. Note that no other configuration change is required. You can continue to use your existing **appender** and **message format**.
+
 # How to use
 
+Let's understand this with an example:
+
+Imagine you have a standalone java application, that uses SLF4J compliant logger (either log4j2 or logback). Here are the classes:
+
+1. The pom.xml
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.sc.hm</groupId>
+    <artifactId>test_app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.sc.hm.otl</groupId>
+            <artifactId>otl-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sc.hm.otl</groupId>
+            <artifactId>otl-slf4j</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+    </dependencies>
+</project>
+
+```
+
+2. logback.xml
+
+```
+<?xml version="1.0"?>
+<configuration debug="true">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] [%X{trc}] [%X{spn}] [%X{pspn}] [%X{bgi}] %-5relative %-5level %logger{36} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
+
+
+```
+
+Apart from the regular pattern, 4 new attributes were added:
+- trc : Will print the traceId, if present
+- spn : Will print the span, if present
+- pspn : Will print the parent spanId, if present
+- bgi : Will print the baggage items, if present
+
+1. Emplooyee.java
+
+```
+
+private class Employee {
+    private Integer id;
+    private String name;
+    private String location;
+    
+    private Department dept;
+    
+    public Employee(Integer id, String name, String location) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
+    
+    public void setDepartment(Department dept) {
+        this.dept = dept;
+    }
+    
+    public Department getDepartment() {
+        return dept;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+}
+
+```
+
+2. Department.java
+
+```
+
+private class Department {
+    private Integer id;
+    private String name;
+    
+    public Department(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+}
+
+```
+
+3. Registration.java
+
+```
+
+import io.opentracing.Scope;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+import java.util.Map;
+import java.util.HashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Registration {
+    
+    private static final Logger logger = LoggerFactory.getLogger(Registration.class);
+    
+    private static final Map<Integer, Employee> employees = new HashMap<>();
+    private static final Map<Integer, Department> departments = new HashMap<>();
+    
+    private static final Tracer tracer = GlobalTracer.get();
+
+    public static void main(String[] args) {
+        logger.info("Starting employee registration");
+        
+        Span span = tracer.buildSpan("main").start();
+        try (Scope scope = tracer.activateSpan(span)) {
+            Employee emp = new Employee(10, "Socrates", "Greece");
+            Department dept = new Department(201, "Philosophy");
+            emp.setDepartment(dept);
+
+            createEmployee(emp);
+            logger.info("Employee registration is complete");
+        }
+        finally {
+            span.finish();
+        }
+    }
+    
+    private static void createEmployee(Employee emp) {
+        Span span = tracer.buildSpan("createEmployee").start();
+        
+        try (Scope scope = tracer.activateSpan(span)) {
+            employees.put(emp.getId(), emp);
+            logger.info("Employee created successfully");
+
+            Department dept = emp.getDepartment();
+            if (dept != null) {
+                createDepartment(dept);
+            }
+        }
+        finally {
+            span.finish();
+        }
+    }
+    
+    private static void createDepartment(Department dept) {
+        Span span = tracer.buildSpan("createDepartment").start();
+        
+        try (Scope scope = tracer.activateSpan(span)) {
+            departments.put(dept.getId(), dept);
+            logger.info("Department created successfully");
+        }
+        finally {
+            span.finish();
+        }
+    }
+}
+
+```
+
+What we are trying here is:
+1. When the main() method is invoked, system will create a new trace T1 and span S1.
+1. It then calls createEmployee() method to create the employee. This method will create a new span S2 to identify it's work.  At this point, S1 becomes aa parent of S2.
+1. Post that, it will call createDepartment() API to creaate the associated department. This method, too, will create aa new span S3 to represent its work. at this stage S2 becomes a parent of S3.
+1. Once the work is complete, the spans and their associated scopes will be closed in reverse order.
+
+S3 closes first, followed by S2 and S1. Note that they all use the same traceId T1. And that's how we can correlate the logs generated by individual methods. Now imagine there are two services instead of two methods. With the help of traceId, we can link them.
+
+Let's see how to run them.
+
+Compile:
+
+```
+mvn clean install
+
+```
+
+Get the classpaath, we will use it in the "Run" command.
+
+```
+mvn dependency:build-classpath
+
+```
+
+Run:
+
+```
+java -javaagent:/path/to/otl-agent-1.0-SNAPSHOT.jar -claasspath <classpath_entries> com.sc.hm.test_app.Registration
+
+```
+
+It will print the below logs:
+
+```
+2020-04-02_23:45:38.487 [main] [] [] [] [] 112   INFO  com.sc.hm.test_app.Registration - Starting employee registration 
+2020-04-02_23:45:38.536 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vPowsc33TaPxmsMZ] [l0sKxjqpWPiGbogD] [] 161   INFO  com.sc.hm.test_app.Registration - Employee created successfully 
+2020-04-02_23:45:38.536 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vLLqLvvU2WvgYCFM] [vPowsc33TaPxmsMZ] [] 161   INFO  com.sc.hm.test_app.Registration - Department created successfully 
+2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [vPowsc33TaPxmsMZ] [l0sKxjqpWPiGbogD] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"vLLqLvvU2WvgYCFM","references":[ {"type":"child_of","spanId":"vPowsc33TaPxmsMZ"}],"operation":"createEmployee","start":717078838022,"end":717078838205} 
+2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [l0sKxjqpWPiGbogD] [] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"vPowsc33TaPxmsMZ","references":[ {"type":"child_of","spanId":"l0sKxjqpWPiGbogD"}],"operation":"createEmployee","start":717078837604,"end":717078839618} 
+2020-04-02_23:45:38.538 [main] [q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC] [l0sKxjqpWPiGbogD] [] [] 163   INFO  com.sc.hm.test_app.Registration - Employee registration is complete 
+2020-04-02_23:45:38.538 [main] [] [] [] [] 163   INFO  c.s.h.o.slf4j.spi.Slf4JLoggerAdapter - {"traceId":"q0u8xAG5lfEbnLB8n2f8fSkbGGEb4mgC","spanId":"l0sKxjqpWPiGbogD","operation":"main","start":717078791089,"end":717078839711}
+
+```
