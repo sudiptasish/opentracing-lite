@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.sc.hm.otl</groupId>
+        <artifactId>opentracing-lite</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.sc.hm.otl</groupId>
+    <artifactId>otl-slf4j</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    
+    <name>otl-slf4j</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.sc.hm.otl</groupId>
+            <artifactId>otl-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <!--
+              Using 2.0.0-alpha1 emits the below error:
+              Classpath contains SLF4J bindings targeting slf4j-api versions prior to 1.8.
+              It is because the springboot and other libraries are still using older version
+              of logback (1.2.3) or log4j (2.12.1).
+              Therefore downgrading the version to just prior 1.8.0
+              
+            <version>2.0.0-alpha1</version>
+            -->
+            <version>1.7.25</version>
+        </dependency>
+    </dependencies>
+        
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>5.6.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
