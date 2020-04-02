@@ -36,14 +36,14 @@ Out of these, log4j2 and logback are stable framework, as they follow the standa
 Opentracing-Lite provides upfront support for all logging frameworks that are currently compliant with SLF4J. For other non-compliant logging framework, one has to write an adapter, and that, too, is very simple.
 
 ## Rich set of metrics
-It exposes a set of MBeans to monitor the span creation, scope activation/deactivation, etc. User can monitor the behavior of the framework via any management console. There are other metrics currently being built that will give developer an idea about the trend. Note that, all these metrics are transient, that means, once you restart your app, you chance to loose these metrics. I may consider persisting these metrics, but currently that is out of scope. See Appendix B for list of metrics.
+It exposes a set of MBeans to monitor the span creation, scope activation/deactivation, etc. User can monitor the behavior of the framework via any management console. There are other metrics currently being built that will give developer an idea about the trend. Note that, all these metrics are transient, that means, once you restart your app, you chance to loose these metrics. I may consider persisting these metrics, but currently that is out of scope. See Appendix A for list of metrics.
 
 ## Schema less
 Opentracing-LiTE does not have a schema on it's own. It does not enforce it either. It relies on the format defined by the developer. There are few reasons for that. Main reason being, it always tries to be developer-friendly. A developer who used to see the logs in the plain text format, should not be forced to switch to a different format, like xml of json. As it may hinder the visibility. 
 
-Opentracing-LiTE, on the other side give developers the freedom to choose the schema and/or format thet want to define, and start logging in prescribed format.
+Opentracing-LiTE, on the other side give developers the freedom to choose the schema and/or format thet want to define, and start logging in prescribed format. However, note that schema enforcement may come in a later version.
 
-## Libraried for popular framework
+## Libraries for popular framework
 It provides the ready-made libraries for popular framework.
 
 # Modules
