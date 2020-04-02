@@ -92,7 +92,7 @@ Imagine you have a standalone java application, that uses SLF4J compliant logger
     <dependencies>
         <dependency>
             <groupId>com.sc.hm.otl</groupId>
-            <artifactId>otl-core</artifactId>
+            <artifactId>otl-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
