@@ -50,8 +50,8 @@ It provides the ready-made libraries for popular framework.
 
 Below are the core modules:
 
-## otl-core
-This contains the core library and specification for various providers. You will most of the time be using this module for tracing.
+## otl-api
+This contains the standard api library and specification for various providers. You will most of the time be using this module for tracing.
 
 ## otl-util
 This library contains some utility classes used by the above modules , plus other modules as well.
