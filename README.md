@@ -328,3 +328,9 @@ Note that the traceId, spanId and parent spanId details are logged. Notice the r
 3. Visitor
 
 Other span category metrics are currently being built.
+
+### MBean Snapshots
+
+![alt text](_images/metric_span.png)
+
+![alt text](_images/metric_scope.png)
