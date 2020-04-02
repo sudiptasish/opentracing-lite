@@ -11,10 +11,10 @@
     </parent>
     
     <groupId>com.sc.hm.otl</groupId>
-    <artifactId>otl-core</artifactId>
+    <artifactId>otl-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     
-    <name>otl-core</name>
+    <name>otl-api</name>
     
     <dependencies>
         <dependency>

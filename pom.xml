@@ -18,7 +18,6 @@
     
     <modules>
         <module>otl-agent</module>
-        <module>otl-core</module>
         <module>otl-jax-rs</module>
         <module>otl-kafka</module>
         <module>otl-metrics</module>
@@ -29,6 +28,7 @@
         <module>otl-vertx</module>
         <module>otl-web</module>
         <module>otl-integ</module>
+        <module>otl-api</module>
     </modules>
 
     <dependencies>
