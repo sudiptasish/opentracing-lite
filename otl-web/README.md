@@ -14,6 +14,7 @@ Configuring OTLFilter is easy. Note that, it is a conventional http servlet filt
 
 ## Include dependent libraries in your pom.xml
 
+```
 <dependencies>
     ....
     <dependency>
@@ -29,6 +30,8 @@ Configuring OTLFilter is easy. Note that, it is a conventional http servlet filt
     </dependency>
     ....
 </dependencies>
+
+```
 
 There are two ways to configure the OTL Web Filter.
 
