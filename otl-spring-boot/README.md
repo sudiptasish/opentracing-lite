@@ -44,6 +44,11 @@ public class EmpSpringBootAppMain {
 
 One just need add the OTLSpringBootConfig in the Import section.
 
-## Build and run
+## Starting your web server
+Modify your java run command, to add the javaagent:
 
-Comppile your project and add run using the otl-agent.
+```
+java -javaagent:/path/to/otl-agent.jar classpath <> EmpSpringBootAppMain
+```
+
+Note that, here we do not start any web/application server and do the deployment, etc. The beauty of springboot is, whenever you start SpringApplication, it will start the embedded Tomcat server and automatically deploy your application.
