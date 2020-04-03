@@ -90,10 +90,13 @@ public void createEmployee() {
 </dependencies>
 ```
 
-## Build
+Build your web application.
 
-Build your application to produce the final war file.
+## Starting your web server
+Modify your server startup script, to add the javaagent:
 
-## Add otl-agent
+```
+java -javaagent:/path/to/otl-agent.jar ......
+```
 
-Mo
+Start the server.
