@@ -40,6 +40,6 @@ Include the otl-metrics library in your pom file. The OTL framework will automat
 
 # MBean Snapshots
 
-![alt text](_images/metric_span.png)
+![alt text](../_images/metric_span.png)
 
-![alt text](_images/metric_scope.png)
+![alt text](../_images/metric_scope.png)
