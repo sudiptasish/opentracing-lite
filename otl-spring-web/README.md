@@ -69,12 +69,12 @@ The RestTemplate will be instrumented to have the necessary interceptor, which w
 
 Using the RestTemplate in the following manner will never activate the interceptor, therefore it is strongly discouraged. Even spring does not recommed it either. You create RestTemplate only once and inject it in relevant classes.
 
-``
+```
 public void createEmployee() {
     RestTemplate rt = new RestTemplate();
     rt.exchange( .... )
 
-``
+```
 
 ## Configure pom file
 
@@ -84,6 +84,12 @@ public void createEmployee() {
     <dependency>
         <groupId>com.sc.hm.otl</groupId>
         <artifactId>otl-spring-web</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <!--  Add the below, only if you want to monitor the span metrics -->
+    <dependency>
+        <groupId>com.sc.hm.otl</groupId>
+        <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     ....
