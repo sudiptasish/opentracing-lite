@@ -13,7 +13,7 @@ Because any Jax-rs implementation is a server side containerized application, it
     ....
     <dependency>
         <groupId>com.sc.hm.otl</groupId>
-        <artifactId>otl-web</artifactId>
+        <artifactId>otl-jax-rs</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!--  Add the below, only if you want to monitor the span metrics -->
