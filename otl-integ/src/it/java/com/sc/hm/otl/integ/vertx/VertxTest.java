@@ -54,7 +54,7 @@ public class VertxTest extends AbstractITBase {
             config1.setJavaOpts("-Dvertx-config-path=vertx-app.json -Dapp-name=EMP");
             config1.setLogFile("target/vertx.log");
             config1.setDebugEnabled(true);
-            config1.setDebugPort(9998);
+            config1.setDebugPort(6666);
             config1.setMainClass("com.sc.hm.otl.integ.vertx.VertxMain");
             
             ProcessConfig config2 = new ProcessConfig();
@@ -64,7 +64,7 @@ public class VertxTest extends AbstractITBase {
             config2.setArgs("--port", "8081", "--ctx", "/dept/api/v1");
             config2.setLogFile("target/vertx.log");
             config2.setDebugEnabled(true);
-            config2.setDebugPort(9999);
+            config2.setDebugPort(6667);
             config2.setMainClass("com.sc.hm.otl.integ.vertx.VertxMain");
             
             ProcessUtil.start(config1, config2);

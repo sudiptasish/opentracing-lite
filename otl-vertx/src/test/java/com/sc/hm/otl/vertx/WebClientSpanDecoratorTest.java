@@ -9,7 +9,8 @@ import com.sc.hm.otl.core.OTLSpan;
 import com.sc.hm.otl.core.RequestCtxDecorator;
 import io.opentracing.tag.Tags;
 import io.vertx.core.http.HttpClientRequest;
-import io.vertx.ext.web.client.HttpResponse;
+import io.vertx.core.http.HttpClientResponse;
+import io.vertx.core.http.HttpMethod;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class WebClientSpanDecoratorTest extends AbstractUnitTest {
         
         HttpClientRequest request = mock(HttpClientRequest.class);
         
-        when(request.getRawMethod()).thenReturn(method);
+        when(request.method()).thenReturn(HttpMethod.DELETE);
         when(request.path()).thenReturn(url);
         
         OTLSpan span = (OTLSpan)tracer.buildSpan("web-client").start();
@@ -78,7 +79,7 @@ public class WebClientSpanDecoratorTest extends AbstractUnitTest {
         int statusCode = 415;
         
         HttpClientRequest request = mock(HttpClientRequest.class);
-        HttpResponse response = mock(HttpResponse.class);
+        HttpClientResponse response = mock(HttpClientResponse.class);
         
         when(response.statusCode()).thenReturn(statusCode);
         
