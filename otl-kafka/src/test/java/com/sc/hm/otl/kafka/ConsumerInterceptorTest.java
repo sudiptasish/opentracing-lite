@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Sudiptasish Chanda
  */
-public class ConsumerInterceptorTest extends AbstractKafkaTest {
+public class ConsumerInterceptorTest extends AbstractUnitTest {
     
     @Test
     public void testOnConsume() {
@@ -62,7 +62,7 @@ public class ConsumerInterceptorTest extends AbstractKafkaTest {
         Map<TopicPartition, List<ConsumerRecord<String, String>>> records = new HashMap<>();
         records.put(new TopicPartition(topic, partition), Arrays.asList(record));
         
-        ConsumerInterceptor interceptor = new OTLKafkaConsumerInterceptor();
+        ConsumerInterceptor interceptor = new TracingConsumerInterceptor();
         interceptor.onConsume(new ConsumerRecords(records));
         
         OTLSpanVisitor visitor = extract();
@@ -155,7 +155,7 @@ public class ConsumerInterceptorTest extends AbstractKafkaTest {
         Map<TopicPartition, List<ConsumerRecord<String, String>>> records = new HashMap<>();
         records.put(new TopicPartition(topic, partition), Arrays.asList(record));
         
-        ConsumerInterceptor interceptor = new OTLKafkaConsumerInterceptor();
+        ConsumerInterceptor interceptor = new TracingConsumerInterceptor();
         interceptor.onConsume(new ConsumerRecords(records));
         
         OTLSpanVisitor visitor = extract();

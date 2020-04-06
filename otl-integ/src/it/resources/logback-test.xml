@@ -26,8 +26,20 @@
             <pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} %-5relative [%thread] [%X{trc}] [%X{spn}] [%X{pspn}] [%X{bgi}] %-5level %class{0} - %msg %n</pattern>
         </encoder>
     </appender>
+    
+    <!-- Special logger for span -->
+    <appender name="SPAN_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/logs/span.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg %n</pattern>
+        </encoder>
+    </appender>
+    <logger name="otl.span.log" level="INFO" additivity="false">
+        <appender-ref ref="SPAN_FILE" />
+    </logger>
 
-    <root level="INFO">
+    <root level="TRACE">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

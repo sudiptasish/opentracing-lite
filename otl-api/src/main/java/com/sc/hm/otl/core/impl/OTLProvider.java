@@ -37,7 +37,7 @@ public class OTLProvider extends Provider {
     public Tracer createTracer() {
         synchronized (OTLProvider.class) {
             if (initialized) {
-                throw new IllegalStateException("Provider is clready initialized. To oobtain"
+                throw new IllegalStateException("Provider is already initialized. To obtain"
                     + " the platform tracer use GlobalTracer.get()");
             }
             initialized = true;

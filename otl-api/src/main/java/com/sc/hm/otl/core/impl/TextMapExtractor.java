@@ -59,7 +59,7 @@ public class TextMapExtractor implements OTLExtractor<TextMapExtract> {
             else {
                 int index = key.indexOf(OTLConstants.BAGGAGE_PREFIX_HEADER, 0);
                 if (index == 0) {
-                    baggages.put(key.substring(OTLConstants.BAGGAGE_PREFIX_HEADER.length() + 1), value);
+                    baggages.put(key.substring(OTLConstants.BAGGAGE_PREFIX_HEADER.length()), value);
                 }
             }
         }

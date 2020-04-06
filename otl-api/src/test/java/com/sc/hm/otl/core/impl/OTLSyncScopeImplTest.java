@@ -47,7 +47,7 @@ public class OTLSyncScopeImplTest {
         OTLSyncScopeManagerImpl scopeManager = (OTLSyncScopeManagerImpl)tracer.scopeManager();
         
         OTLSyncScope scope = new OTLSyncScopeImpl(scopeManager
-                , new OTLSpanImpl(tracer, "testCreateValidScope", null, null, true, 0)
+                , new OTLSpanImpl(tracer, "testCreateValidScope", null, null, null, true, 0)
                 , null);
         
         assertNotNull(scope, "Scope must be non-null");

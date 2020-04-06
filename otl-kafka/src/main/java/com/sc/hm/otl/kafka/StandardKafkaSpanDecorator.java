@@ -16,8 +16,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
  */
 public class StandardKafkaSpanDecorator implements KafkaSpanDecorator {
     
-    public static final String COMPONENT_KAFKA_PRODUCER = "kafka-producer";
-    public static final String COMPONENT_KAFKA_CONSUMER = "kafka-consumer";
+    public static final String COMPONENT_KAFKA_PRODUCER = "kafka.producer";
+    public static final String COMPONENT_KAFKA_CONSUMER = "kafka.consumer";
     
     @Override
     public void onSend(ProducerRecord<Object, Object> record, Span span) {

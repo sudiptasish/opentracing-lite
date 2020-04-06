@@ -5,9 +5,8 @@
  */
 package com.sc.hm.otl.spboot;
 
-import com.sc.hm.otl.spring.client.OTLSpringWebConfig;
-import com.sc.hm.otl.web.filter.OTLFilter;
-import com.sc.hm.otl.web.filter.StandardFilterSpanDecorator;
+import com.sc.hm.otl.spring.client.SpringWebConfig;
+import com.sc.hm.otl.web.filter.TracingWebFilter;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Import;
 /**
  * OTL Spring Boot configuration.
  * 
- * Although the {@link OTLFilter} includes the {@link @WebFilter} annotation, and
+ * Although the {@link TracingWebFilter} includes the {@link @WebFilter} annotation, and
  * today most of the web server/application server can recognize this annotation
  * and accordingly load the filter. However, spring boot uses the embedded web
  * server (Apache Tomcat). Due to the fact that embedded containers do not support
@@ -36,7 +35,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ServletComponentScan(basePackages = "com.sc.hm.otl.web.filter")
-@Import({OTLSpringWebConfig.class})
+@Import({SpringWebConfig.class})
 public class OTLSpringBootConfig {
     
     // In future, if additional Bean needs to be created, can be added here.

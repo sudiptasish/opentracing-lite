@@ -5,6 +5,7 @@
  */
 package com.sc.hm.otl.core.impl;
 
+import com.sc.hm.otl.core.OTLAsyncScopeManager;
 import com.sc.hm.otl.core.OTLSpanContext;
 import com.sc.hm.otl.core.OTLSyncScopeManager;
 import io.opentracing.Scope;
@@ -25,11 +26,13 @@ import com.sc.hm.otl.core.VisitorFactory;
 public class OTLTracerImpl implements OTLTracer {
     
     private final OTLSyncScopeManager scopeManager;
+    private final OTLAsyncScopeManager asyncScopeManager;
     private final CarrierRegistry registry;
     private final OTLSpanVisitor visitor;
     
     OTLTracerImpl() {
         scopeManager = new OTLSyncScopeManagerImpl();
+        asyncScopeManager = new OTLAsyncScopeManagerImpl();
         registry = new CarrierRegistry();
         visitor = VisitorFactory.getFactory().getVisitor();
     }
@@ -47,6 +50,11 @@ public class OTLTracerImpl implements OTLTracer {
     @Override
     public Scope activateSpan(Span span) {
         return scopeManager.activate(span);
+    }
+
+    @Override
+    public Scope activateAsync(Span span) {
+        return asyncScopeManager.activate(span);
     }
 
     @Override

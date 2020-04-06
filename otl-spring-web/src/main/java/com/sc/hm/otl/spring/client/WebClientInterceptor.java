@@ -46,7 +46,7 @@ import reactor.core.publisher.Mono;
  * and modify a client request (or response). Filters are very suitable for adding
  * functionality to every single request since the logic stays in one place. 
  * 
- * Note that, unlike {@link RestTemplateInterceptor}, it does not have the provision
+ * Note that, unlike {@link RestClientInterceptor}, it does not have the provision
  * of creating a span. It's only job is to inject the tracing headers into the 
  * outboud client request.
  * 
@@ -85,7 +85,7 @@ import reactor.core.publisher.Mono;
  */
 public class WebClientInterceptor implements ExchangeFilterFunction {
     
-    private final Logger logger = LoggerFactory.getLogger(RestTemplateInterceptor.class);
+    private final Logger logger = LoggerFactory.getLogger(RestClientInterceptor.class);
     
     private final Tracer tracer = GlobalTracer.get();
     
@@ -99,7 +99,7 @@ public class WebClientInterceptor implements ExchangeFilterFunction {
         if (span != null) {
             tracer.inject(span.context()
                 , Format.Builtin.TEXT_MAP_INJECT
-                , new RestTemplateHeaderCarrier(request.headers()));
+                , new HttpHeaderAdapter(request.headers()));
             
             if (logger.isTraceEnabled()) {
                 logger.trace("Span creation is disabled in WebClient filter. Therefore propagating the"

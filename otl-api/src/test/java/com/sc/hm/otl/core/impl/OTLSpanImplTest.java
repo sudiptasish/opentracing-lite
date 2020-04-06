@@ -36,6 +36,7 @@ public class OTLSpanImplTest {
                 , "testCreateInvalidSpan"
                 , null
                 , null
+                , null
                 , false
                 , System.nanoTime() / 1000));
         
@@ -44,6 +45,7 @@ public class OTLSpanImplTest {
         e = assertThrows(
             NullPointerException.class,
             () -> new OTLSpanImpl(new OTLTracerImpl()
+                , null
                 , null
                 , null
                 , null
@@ -68,6 +70,7 @@ public class OTLSpanImplTest {
         OTLSpan span = new OTLSpanImpl(new OTLTracerImpl()
                 , operation
                 , references
+                , null
                 , null
                 , false
                 , startTime);

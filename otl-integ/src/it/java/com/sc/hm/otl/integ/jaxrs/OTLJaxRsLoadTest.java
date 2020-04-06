@@ -34,7 +34,7 @@ public class OTLJaxRsLoadTest extends AbstractITBase {
     public static final String EMP_SRVC = "http://localhost:7001/empMgmt/api/v1/employees";
     public static final String DEPT_SRVC = "http://localhost:7002/deptMgmt/api/v1/departments";
     
-    @BeforeAll
+    //@BeforeAll
     public static void setupEnv() {
         try {
             if (logger.isInfoEnabled()) {
@@ -69,7 +69,7 @@ public class OTLJaxRsLoadTest extends AbstractITBase {
         }
     }
     
-    @Test
+    //@Test
     @Order(1)
     public void testCreateEmployeesInBulk() throws InterruptedException {
         logStart();
@@ -138,7 +138,7 @@ public class OTLJaxRsLoadTest extends AbstractITBase {
         }
     }
 
-    @AfterAll
+    //@AfterAll
     public static void tearDown() {
         try {
             if (logger.isInfoEnabled()) {

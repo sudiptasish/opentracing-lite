@@ -107,8 +107,8 @@ public class JettyServer {
         
         Map<String, String> params = new HashMap<>();
         params.put("jersey.config.server.provider.packages", "com.sc.hm.otl.integ,com.sc.hm.otl.jaxrs.filter");
-        params.put("com.sun.jersey.spi.container.ContainerRequestFilters", "com.sc.hm.otl.jaxrs.filter.OTLRequestFilter");
-        params.put("com.sun.jersey.spi.container.ContainerResponseFilters", "com.sc.hm.otl.jaxrs.filter.OTLResponseFilter");
+        params.put("com.sun.jersey.spi.container.ContainerRequestFilters", "com.sc.hm.otl.jaxrs.filter.TracingContainerFilter");
+        params.put("com.sun.jersey.spi.container.ContainerResponseFilters", "com.sc.hm.otl.jaxrs.filter.TracingContainerFilter");
         params.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
         
         config.addServlet("JerseyServlet", "org.glassfish.jersey.servlet.ServletContainer", "/*", params);

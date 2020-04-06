@@ -19,10 +19,11 @@ public final class OTLConstants {
     
     public static final String BAGGAGE_ITEM_SEPARATOR = "=";
     public static final String VERTX_ACTIVE_SPAN = "VAS";
+    public static final String VERTX_SCOPE = "VSC";
     
     public static final String DECORATOR = "DECORATOR";
     public static final String SKIP_PATTERN = "SKIP_PATTERN";
     public static final String URL_PATTERN = "URL_PATTERN";
     
-    
+    public static final String INCOMPLETE_TAG = "incomplete";
 }

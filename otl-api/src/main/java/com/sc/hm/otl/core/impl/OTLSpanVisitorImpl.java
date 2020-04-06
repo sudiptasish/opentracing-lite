@@ -166,7 +166,7 @@ public class OTLSpanVisitorImpl implements OTLSpanVisitor {
                 if (pretty) {
                     indent(buffer, gap);
                 }
-                buffer.add("\"").add(me.getKey()).add("\"").add(":").add("\"").add(me.getValue().toString()).add("\"");
+                buffer.add("\"").add(me.getKey()).add("\"").add(":").add("\"").add(me.getValue() != null ? me.getValue().toString() : "").add("\"");
                 i ++;
                 if (i < size) {
                     buffer.add(",");

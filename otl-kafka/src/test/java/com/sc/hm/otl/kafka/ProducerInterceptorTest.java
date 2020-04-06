@@ -27,13 +27,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * @author Sudiptasish Chanda
  */
-public class ProducerInterceptorTest extends AbstractKafkaTest {
+public class ProducerInterceptorTest extends AbstractUnitTest {
     
     @Test
     public void testOnSendNoParent() {
         String topic = "test.topic";
         
-        ProducerInterceptor interceptor = new OTLKafkaProducerInterceptor();
+        ProducerInterceptor interceptor = new TracingProducerInterceptor();
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, "Hello Interceptor");
         
         record = interceptor.onSend(record);
@@ -113,7 +113,7 @@ public class ProducerInterceptorTest extends AbstractKafkaTest {
     public void testOnSendWithParent() {
         String topic = "test.topic";
         
-        ProducerInterceptor interceptor = new OTLKafkaProducerInterceptor();
+        ProducerInterceptor interceptor = new TracingProducerInterceptor();
         ProducerRecord<String, String> record = new ProducerRecord<>(topic, "Hello Interceptor");
         
         // Create a regular span first.

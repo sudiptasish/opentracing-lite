@@ -41,6 +41,7 @@ public class OTLSyncScopeManagerImplTest {
             , "testActivateSpan"
             , null
             , null
+            , null
             , false
             , System.nanoTime() / 1000);
         

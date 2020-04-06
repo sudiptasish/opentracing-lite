@@ -5,6 +5,7 @@
  */
 package com.sc.hm.otl.web.filter;
 
+import com.sc.hm.otl.core.RequestCtxDecorator;
 import io.opentracing.Span;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Sudiptasish Chanda
  */
-public class MockOTLFilterDecorator implements FilterSpanDecorator {
+public class MockOTLFilterDecorator implements RequestCtxDecorator<HttpServletRequest, HttpServletResponse> {
 
     @Override
     public void onRequest(HttpServletRequest request, Span span) {
@@ -27,8 +28,6 @@ public class MockOTLFilterDecorator implements FilterSpanDecorator {
 
     @Override
     public void onError(HttpServletRequest request, HttpServletResponse response, Throwable e, Span span) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
 }

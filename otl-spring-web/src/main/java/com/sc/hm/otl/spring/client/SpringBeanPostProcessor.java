@@ -56,7 +56,7 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
             logger.trace("SpringBeanPostProcessor::postProcessAfterInitialization invoked for: {}", beanName);
         }
         if (bean instanceof RestTemplate) {
-            ((RestTemplate)bean).getInterceptors().add(new RestTemplateInterceptor());
+            ((RestTemplate)bean).getInterceptors().add(new RestClientInterceptor());
             if (logger.isTraceEnabled()) {
                 logger.trace("Successfully added interceptor [OTLRestTemplateInterceptor] to RestTemplate");
             }

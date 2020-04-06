@@ -10,6 +10,7 @@ import com.sc.hm.otl.util.OTLConstants;
 import io.opentracing.propagation.TextMapInject;
 import java.util.Map;
 import com.sc.hm.otl.core.OTLInjector;
+import io.opentracing.util.GlobalTracer;
 
 /**
  *
@@ -21,7 +22,10 @@ public class TextMapInjector implements OTLInjector<TextMapInject> {
 
     @Override
     public void inject(TextMapInject carrier) {
-        inject(null, carrier);
+        OTLSpanContext context = (OTLSpanContext)GlobalTracer.get().activeSpan();
+        if (context != null) {
+            inject(null, carrier);
+        }
     }
 
     @Override

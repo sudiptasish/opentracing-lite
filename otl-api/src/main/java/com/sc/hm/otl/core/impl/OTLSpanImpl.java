@@ -41,6 +41,7 @@ public class OTLSpanImpl implements OTLSpan, Visitable {
     private final List<OTLReference> references;
     private final Map<String, Object> tags;
     
+    private final Object callback;
     private final boolean ignoreActive;
     private final long startMicros;
     private long endMicros = -1L;
@@ -49,6 +50,7 @@ public class OTLSpanImpl implements OTLSpan, Visitable {
         , String operation
         , List<OTLReference> references
         , Map<String, Object> tags
+        , Object callback
         , boolean ignoreActive
         , long startMicros) {
         
@@ -95,6 +97,7 @@ public class OTLSpanImpl implements OTLSpan, Visitable {
             this.context = Objects.requireNonNull(tmp, "Context should be non-null");
         }
         this.tags = tags != null ? tags : new HashMap<>();
+        this.callback = callback;
         this.ignoreActive = ignoreActive;
         this.startMicros = startMicros;
     }
@@ -246,5 +249,10 @@ public class OTLSpanImpl implements OTLSpan, Visitable {
             + ". Tags: " + tags
             + ". Start: " + startMicros
             + ". End: " + endMicros;
+    }
+
+    @Override
+    public Object callback() {
+        return this.callback;
     }
 }

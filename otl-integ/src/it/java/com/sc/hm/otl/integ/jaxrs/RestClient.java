@@ -5,8 +5,7 @@
  */
 package com.sc.hm.otl.integ.jaxrs;
 
-import com.sc.hm.otl.jaxrs.filter.OTLClientRequestFilter;
-import com.sc.hm.otl.jaxrs.filter.OTLClientResponseFilter;
+import com.sc.hm.otl.jaxrs.filter.TracingClientFilter;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
@@ -21,8 +20,7 @@ public class RestClient {
     static {
         CLIENT = ClientBuilder
             .newBuilder()
-            .register(new OTLClientRequestFilter())
-            .register(new OTLClientResponseFilter())
+            .register(new TracingClientFilter())
             .build();
     }
     

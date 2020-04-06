@@ -51,6 +51,12 @@ public interface OTLSpan extends Span {
     Map<String, Object> tags();
     
     /**
+     * Return the callback object
+     * @return 
+     */
+    Object callback();
+    
+    /**
      * Return the start time of the span in microseconds.
      * @return long
      */

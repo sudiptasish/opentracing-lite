@@ -13,6 +13,7 @@ import com.sc.hm.otl.core.metric.EventSource;
 import com.sc.hm.otl.core.metric.EventType;
 import com.sc.hm.otl.core.metric.MetricExtension;
 import io.opentracing.References;
+import io.opentracing.Scope;
 import io.opentracing.Span;
 import io.opentracing.SpanContext;
 import io.opentracing.Tracer;
@@ -31,6 +32,14 @@ import java.util.Map;
  * @author Sudiptasish Chanda
  */
 public interface OTLTracer extends Tracer {
+
+    /**
+     * Activate the span in an async environment.
+     * 
+     * @param span
+     * @return 
+     */
+    Scope activateAsync(Span span);
     
     /**
      * This is the method to resume a span.
@@ -93,6 +102,8 @@ public interface OTLTracer extends Tracer {
         private final Map<String, Object> tags = new HashMap<>();
         private boolean ignoreActive;
         private long startTime = System.nanoTime() / 1000;  // Micro seconds
+        
+        private Object callback;
         
         private boolean childInvoked = false;
         
@@ -185,6 +196,11 @@ public interface OTLTracer extends Tracer {
             this.startTime = microseconds;
             return this;
         }
+        
+        public SpanBuilder withCallback(Object callback) {
+            this.callback = callback;
+            return this;
+        }
 
         @Override
         public OTLSpan start() {
@@ -211,6 +227,7 @@ public interface OTLTracer extends Tracer {
                 , operation
                 , references
                 , tags
+                , callback
                 , ignoreActive
                 , startTime);
             

@@ -1,0 +1,38 @@
+{
+    "eventbus.logging" : true,
+    "event.loop.size"  : 1,
+    "worker.pool.size" : 1,
+    
+    "emp" : {
+        "ha.mode" : false,
+        "worker.mode" : false,
+        "instance.count" : 1,
+        "log.activity" : true,
+        
+        "http.server" : {
+            "http.port"  : 8080,
+            "ssl.enabled" : false,
+            "compression.enabled" : true
+        },
+        
+        "dept.host" : "localhost",
+        "dept.port" : 8081,
+        "dept.uri" : "/dept/api/v1/departments"
+    },
+    "dept" : {
+        "ha.mode" : false,
+        "worker.mode" : false,
+        "instance.count" : 1,
+        "log.activity" : true,
+        "send.address" : "dept.event.addr",
+        
+        "http.server" : {
+            "http.port"  : 8081,
+            "ssl.enabled" : false,
+            "compression.enabled" : true
+        }
+    },
+    "prc" : {
+        "bus.address" : "dept.event.addr"
+    }
+}

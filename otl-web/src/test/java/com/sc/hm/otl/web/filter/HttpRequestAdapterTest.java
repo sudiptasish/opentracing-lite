@@ -5,7 +5,7 @@
  */
 package com.sc.hm.otl.web.filter;
 
-import com.sc.hm.otl.web.filter.HttpRequestAdapter;
+import com.sc.hm.otl.web.filter.HttpHeaderCarrier;
 import com.sc.hm.otl.util.OTLConstants;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Sudiptasish Chanda
  */
-public class HttpRequestAdapterTest extends AbstractWebTest {
+public class HttpRequestAdapterTest extends AbstractUnitTest {
     
     @Test
     public void testIterator() {
@@ -35,7 +35,7 @@ public class HttpRequestAdapterTest extends AbstractWebTest {
         when(request.getHeader(OTLConstants.TRACE_ID_HEADER)).thenReturn(props.get(OTLConstants.TRACE_ID_HEADER));
         when(request.getHeader(OTLConstants.SPAN_ID_HEADER)).thenReturn(props.get(OTLConstants.SPAN_ID_HEADER));
         
-        HttpRequestAdapter adapter = new HttpRequestAdapter(request);
+        HttpHeaderCarrier adapter = new HttpHeaderCarrier(request);
         int counter = 0;
         
         for (Iterator<Map.Entry<String, String>> itr = adapter.iterator(); itr.hasNext(); counter ++) {
