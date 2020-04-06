@@ -7,9 +7,9 @@ Because a single worker thread is capable of managing multiple client connection
 
 Before we integrate vertx with opentracing-lite library, let us understand the different flow, where a span propagation is required.
 
-*. Http Server - Whenever a new request is made to any vertx server, it has to be captured and a new span will be created. However, because we cannot store the newly created span in the threadlocal, therefore it is stored in a special context object. When the final response is sent to client, the appropriate handler will ensure to extract the span from the context object and complete the processing.
-*. Event Bus - Multiple verticles can communicate with each other via eventbus. If the http server verticle is willing to cmmunicate with some other (worker) verticle, it must ensure to pass the span context to the worker.
-*. Web client - If one vertx app is trying to communicate other vertx app over tcp/http, the calling service has to ensure the span context is propagated.
+1. Http Server - Whenever a new request is made to any vertx server, it has to be captured and a new span will be created. However, because we cannot store the newly created span in the threadlocal, therefore it is stored in a special context object. When the final response is sent to client, the appropriate handler will ensure to extract the span from the context object and complete the processing.
+1. Event Bus - Multiple verticles can communicate with each other via eventbus. If the http server verticle is willing to cmmunicate with some other (worker) verticle, it must ensure to pass the span context to the worker.
+1. Web client - If one vertx app is trying to communicate other vertx app over tcp/http, the calling service has to ensure the span context is propagated.
 
 The opentracing-lite library for vertx (otl-vertx) addresses all the above scenarios. Although, the configuration is not automatic, developer has to write very little code for seemless integration.
 
@@ -155,4 +155,12 @@ public void invoke(RoutingContext ctx, String port, String endpoint, String uri)
 ```
 
 Note that, the client invocation must happen within the **try-with-resources** block. Otherwise no context data will be propagated to called service.
+
+## Start your application
+
+Add the otl-agent and start your vertx server.
+
+```
+java -javaagent:/path/to/otl-agent.jar ......
+```
 
