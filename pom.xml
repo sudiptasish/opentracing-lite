@@ -15,12 +15,12 @@
     </properties>
     
     <!--name>opentracing-lite</name-->
-    <name>${project.groupId}:${project.artifactId}</name>
+    <!--name>${project.groupId}:${project.artifactId}</name>
     <description>A simple light-weight opentracing framework implementation</description>
-    <url>https://github.com/sudiptasish/opentracing-lite</url>
+    <url>https://github.com/sudiptasish/opentracing-lite</url-->
     
     <!-- Declaring the license(s) used for distributing OTL components -->
-    <licenses>
+    <!--licenses>
         <license>
           <name>The Apache License, Version 2.0</name>
           <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
@@ -40,7 +40,7 @@
         <connection>scm:git:git://github.com/sudiptasish/opentracing-lite.git</connection>
         <developerConnection>scm:git:ssh://github.com/sudiptasish/opentracing-lite.git</developerConnection>
         <url>https://github.com/sudiptasish/opentracing-lite/tree/master</url>
-    </scm>
+    </scm-->
     
     <modules>
         <module>otl-agent</module>
