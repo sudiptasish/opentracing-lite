@@ -14,7 +14,33 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
-    <name>opentracing-lite</name>
+    <!--name>opentracing-lite</name-->
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A simple light-weight opentracing framework implementation</description>
+    <url>https://github.com/sudiptasish/opentracing-lite</url>
+    
+    <!-- Declaring the license(s) used for distributing OTL components -->
+    <licenses>
+        <license>
+          <name>The Apache License, Version 2.0</name>
+          <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Sudiptasish Chanda</name>
+            <email>sudiptasish@gmail.com</email>
+            <organization>None</organization>
+            <organizationUrl>https://github.com/sudiptasish</organizationUrl>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git://github.com/sudiptasish/opentracing-lite.git</connection>
+        <developerConnection>scm:git:ssh://github.com/sudiptasish/opentracing-lite.git</developerConnection>
+        <url>https://github.com/sudiptasish/opentracing-lite/tree/master</url>
+    </scm>
     
     <modules>
         <module>otl-agent</module>
