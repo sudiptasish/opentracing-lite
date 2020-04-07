@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * OTL span.
- * It extends the characteristic of opentracing {@link span} and provides some 
+ * It extends the characteristic of opentracing {@link Span} and provides some 
  * additional behavior. 
  *
  * @author Sudiptasish Chanda
@@ -62,7 +62,7 @@ public interface OTLSpan extends Span {
     
     /**
      * Return the callback object
-     * @return 
+     * @return Object
      */
     Object callback();
     

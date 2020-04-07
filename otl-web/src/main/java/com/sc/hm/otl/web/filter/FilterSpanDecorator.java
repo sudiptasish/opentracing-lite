@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * Decorating a span implies adding additional info about the span. Eventually 
  * they get stored as a tag.
- * Note that it is not mandatory to provide a span decorator. The {@link OTLFilter}
+ * Note that it is not mandatory to provide a span decorator. The {@link TracingWebFilter}
  * by default includes the {@link FilterSpanDecorator}, which takes most
  * of the responsibility of decorating the newly created span. The user, however,
  * can provide their own decorator by specifying them in the web.xml file.

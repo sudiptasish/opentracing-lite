@@ -41,7 +41,7 @@ import java.lang.instrument.Instrumentation;
  * that instantiate and initialize the platform specific tracer.
  * 
  * It follows the service loader mechanism to find out the available factory APIs,
- * and instantiate the provider specific {@link Trace}.
+ * and instantiate the provider specific {@link Tracer}.
  * 
  * The agent must be attached to the jvm during startup with a command-line interface,
  * an agent is started by adding this option to the command-line:
@@ -55,8 +55,8 @@ public class OTLAgent {
      * Once the agent is loaded into the memory, it will call the premain method,
      * passing the {@link Instrumentation} instance.
      * 
-     * @param args 
-     * @param inst
+     * @param args  The command line argument.
+     * @param inst  Instrumentation object passed by the jvm during startup.
      */
     public static void premain(String args, Instrumentation inst) {
         initializeTracer();
@@ -73,8 +73,8 @@ public class OTLAgent {
      * vm.loadAgent(agentFile.getAbsolutePath());
      * vm.detach();
      * 
-     * @param args 
-     * @param inst
+     * @param args  The command line argument.
+     * @param inst  Instrumentation object passed post agent load.
      */
     public static void agentmain(String args, Instrumentation inst) {
         initializeTracer();

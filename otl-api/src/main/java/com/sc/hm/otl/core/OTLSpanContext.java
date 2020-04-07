@@ -34,14 +34,14 @@ public interface OTLSpanContext extends SpanContext {
     /**
      * Add the baggage item to this span context.
      * 
-     * @param key
-     * @param value 
+     * @param key       The baggage key
+     * @param value     Corresponding baggage item value
      */
     void addBaggageItem(String key, String value);
     
     /**
      * Return the item value corresponding to this item key.
-     * @param key
+     * @param key       The baggage key
      * @return String
      */
     String getBaggageItem(String key);
@@ -53,8 +53,8 @@ public interface OTLSpanContext extends SpanContext {
     Map<String, String> getBaggageItems();
     
     /**
-     * 
-     * @return 
+     * Return the sampling value.
+     * @return int
      */
     Integer sampled();
 }

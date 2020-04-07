@@ -81,7 +81,7 @@ public class TracingResponseHandler implements Handler<AsyncResult<HttpResponse<
     
     /**
      * Finish the processing.
-     * @param result 
+     * @param result    the final result object.
      */
     protected void process(AsyncResult<HttpResponse<Buffer>> result) {
         // Empty implementation

@@ -42,7 +42,8 @@ public interface OTLExtractor<C> {
      * 3. Sampled
      * 4. Baggage Items
      * 
-     * @param carrier
+     * @param carrier   The carrier object from where the required conetxtual info
+     *                  will be extracted.
      * @return OTLSpanContext
      */
     OTLSpanContext extract(C carrier);

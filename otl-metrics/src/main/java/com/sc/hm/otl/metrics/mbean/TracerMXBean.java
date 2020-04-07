@@ -16,6 +16,7 @@
 package com.sc.hm.otl.metrics.mbean;
 
 /**
+ * Interface for tracer mbean.
  *
  * @author Sudiptasish Chanda
  */
@@ -29,13 +30,13 @@ public interface TracerMXBean {
     
     /**
      * Return the name of the propagation registry.
-     * @return 
+     * @return String
      */
     String getRegistryName();
     
     /**
      * Get the span visitor name.
-     * @return 
+     * @return String
      */
     String getSpanVisitor();
 }

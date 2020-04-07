@@ -41,10 +41,12 @@ import reactor.core.publisher.Mono;
  * <p>
  * As of today, the following headers will be injected:
  * 
+ * <ul>
  * <li>X-B3-TraceId</li>
  * <li>X-B3-SpanId</li>
  * <li>X-B3-Sampled</li>
- * <li>X-B3-Baggage-<key></li>
+ * <li>X-B3-Baggage-{key}</li>
+ * </ul>
  * 
  * <p>
  * As of Spring Framework 5, alongside the WebFlux stack, Spring introduced a new
@@ -76,7 +78,7 @@ import reactor.core.publisher.Mono;
  * You can, however, define the WebClient like below:
  * <pre>
  * {@code 
- *     @Bean
+ *     
  *     public WebClient defaultWebClient() {
  *         return WebClient.builder()
  *             .baseUrl(BASE_URL)

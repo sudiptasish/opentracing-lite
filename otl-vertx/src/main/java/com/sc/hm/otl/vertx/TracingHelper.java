@@ -33,19 +33,21 @@ public final class TracingHelper {
     private static final Logger logger = LoggerFactory.getLogger(TracingHelper.class);
     
     /**
+     * Finish the span that is currently present in the routing context.
      * 
-     * @param routingCtx
-     * @param decorators 
+     * @param routingCtx    Vertx routing context object.
+     * @param decorators    Vertx span decorators.
      */
     public static void windUp(RoutingContext routingCtx, List<RequestCtxDecorator> decorators) {
         windUp(routingCtx, decorators, false);
     }
 
     /**
+     * Finish the span(s).
      * 
-     * @param routingCtx
-     * @param decorators 
-     * @param errorOccurred 
+     * @param routingCtx    Vertx routing context object.
+     * @param decorators    Vertx span decorators.
+     * @param errorOccurred Indicate whether the current call has run into some error.
      */
     public static void windUp(RoutingContext routingCtx
         , List<RequestCtxDecorator> decorators

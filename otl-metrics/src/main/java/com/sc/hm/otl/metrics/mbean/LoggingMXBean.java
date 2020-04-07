@@ -16,6 +16,7 @@
 package com.sc.hm.otl.metrics.mbean;
 
 /**
+ * Interface for logging mx bean
  *
  * @author Sudiptasish Chanda
  */
@@ -23,19 +24,19 @@ public interface LoggingMXBean {
     
     /**
      * Return the name of the context adapter.
-     * @return 
+     * @return String
      */
     String getContextAdapter();
     
     /**
      * Return the logger factory provider.
-     * @return 
+     * @return String
      */
     String getLoggerFactoryProvider();
     
     /**
      * Return the name of the logger adapter.
-     * @return 
+     * @return String
      */
     String getLoggerAdapter();
 }

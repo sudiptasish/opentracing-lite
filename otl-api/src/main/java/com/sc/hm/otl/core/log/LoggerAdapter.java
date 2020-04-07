@@ -32,7 +32,7 @@ public interface LoggerAdapter {
      * Log the message to appropriate destination.
      * The logging will always be done at INFO level.
      * 
-     * @param msg 
+     * @param msg   The message to be logged.
      */
     void log(String msg);
 }

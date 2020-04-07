@@ -53,8 +53,11 @@ public final class OTLContextLogger {
     }
     
     /**
+     * Log a message by calling the underlying logging framework provider.
+     * If no provider found, then the default console adapter will be used to log
+     * the message on the console.
      * 
-     * @param msg 
+     * @param msg   The message to be logged.
      */
     public static void log(String msg) {
         LOGGER_ADAPTER.log(msg);

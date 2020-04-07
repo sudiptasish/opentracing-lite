@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -29,15 +28,17 @@ import org.springframework.web.reactive.function.client.WebClient;
  * <p>
  * Followings are the steps that takes place during Spring Bean life cycle.
  *
+ * <ul>
  * <li>Spring loads bean definitions by scanning the classes with the configuration, component annotations.</li>
  * <li>It also load the bean definition by parsing any bean XML files.</li>
  * <li>Bean definitions added to BeanFactory.</li>
  * <li>During the bean creation process, Spring DI will come in to picture to address any dependencies.</li>
  * <li>BeanPostProcessor will allow us to do some additional bean processing before and after bean initialization.</li>
  * <li>The Spring bean is ready to use.</li>
+ * </ul>
  * 
  * The purpose of this post processor is to capture the instantiation of any {@link RestTemplate}
- * and add the {@link OTLRestTemplateInterceptor} as one of the interceptors to
+ * and add the {@link RestClientInterceptor} as one of the interceptors to
  * propaagate the span context.
  * 
  * <p>

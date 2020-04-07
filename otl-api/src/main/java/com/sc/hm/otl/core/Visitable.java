@@ -25,7 +25,7 @@ public interface Visitable {
     /**
      * API to grant the permission to a visitor.
      * 
-     * @param visitor 
+     * @param visitor   The span visitor which will visit this object.
      */
     void accept(OTLSpanVisitor visitor);
 }

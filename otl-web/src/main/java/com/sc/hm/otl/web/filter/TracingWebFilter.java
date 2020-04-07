@@ -46,22 +46,20 @@ import org.slf4j.LoggerFactory;
  * Filter that must be deployed in the container by the app that intents to use
  * the opentracing lite implementation.
  * 
- * <br/>
  * The <code>TracingWebFilter</code> will intercept any incoming http request and  set
  * the appropriate parameters in the tracing context. These parameters and their
  * values will be used to trace a request flow. Once the filter returns the response
  * to the client it will dump this information as a span.log.
- * <br/>
+ * 
  * The Filter provides a default constructor. In case the filter is initialized
  * via the lifecycle APIs of the container, the {@code javax.servlet.Filter#init(javax.servlet.FilterConfig)}
  * method will take care of setting the necessary decorator(s) and skip pattern
  * in the context, so that these can be used by this filter at the time of tracing a request.
- * <br/>
+ * 
  * </p>
  *
- * <br/>
  * <b>Usage:</b>
- * <br/>
+ * 
  * <b>1.</b> Specify the filter name in the web.xml
  * <pre>
  * {@code
@@ -133,29 +131,29 @@ import org.slf4j.LoggerFactory;
  * will be added along with other platform provided Decorator(s).
  *
  * <p>
- * <br/>
  * <b>2.</b> Second option is to dynamically register this Filter with the context.
  * The container managed objects (e.g., Filter, Servlet, Listener, etc) are
  * invoked in the following order:
+ * <ul>
  *   <li>ServletContextListener.contextInitialized</li>
  *   <li>Filter.init</li>
  *   <li>Servlet.init</li>
- *
+ *</ul>
  * <p>
  * You can add your code in the ServletContextListener.contextInitialized
  * method to programmatically register the tracing filter.
  * 
  * <pre>
  * {@code
- * @Override
+ * 
  * public void contextInitialized(ServletContextEvent ctxEvent) {
  *     ServletContext context = ctxEvent.getServletContext();
  *
  *     FilterRegistration.Dynamic filterReg = context
  *         .addFilter("OpenTracingFilter", "com.sc.hm.otl.web.filter.TracingWebFilter");
  *
- *     filterReg.setInitParameter(DECORATOR, "fully_qualified_class_name_of_custom_decorator");
- *     filterReg.setInitParameter(SKIP_PATTERN, "<pattern_regular_exp>");
+ *     filterReg.setInitParameter(DECORATOR, "custom.decorator");
+ *     filterReg.setInitParameter(SKIP_PATTERN, "pattern.regular.exp");
  *     filterReg.addMappingForUrlPatterns(
  *         EnumSet.of(DispatcherType.REQUEST)
  *         , Boolean.TRUE

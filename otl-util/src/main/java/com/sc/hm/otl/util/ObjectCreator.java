@@ -29,10 +29,10 @@ public class ObjectCreator {
      * It uses the no-argument constructor (default one) while instantiating
      * the object (provided the no-argument constructor is defined).
      * 
-     * @param   <T>
-     * @param   className           Class name
+     * @param   <T>         Class type
+     * @param   className   Class name
      * 
-     * @return  T                   New Instance
+     * @return  T
      */
     @SuppressWarnings("unchecked")
 	public static <T> T create(String className) {
@@ -60,13 +60,15 @@ public class ObjectCreator {
     
     /**
      * Create and return the instance of the class designated by this className.
-     * It uses the specific parameterized constructor while instantiating the class
-     * instance.
+     * It uses the specific parameterized constructor while instantiating the
+     * class instance.
      * 
-     * @param   <T>
-     * @param   className           Class name
+     * @param   <T>         Class type
+     * @param   className   Class name
+     * @param paramTypes    The parameter types, in case it's a parameterized constructor
+     * @param params        The value of the parameters.
      * 
-     * @return  T                   New Instance
+     * @return  T
      */
     @SuppressWarnings("unchecked")
 	public static <T> T create(String className

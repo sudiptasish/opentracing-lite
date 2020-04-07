@@ -101,8 +101,8 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
      * instantiating the tracing handler. The decorator will be added along with
      * the default {@link MiddlewareSpanDecorator} decorator.
      * 
-     * @param decoratorClass
-     * @param skipPattern 
+     * @param decoratorClass    The custom decorator class.
+     * @param skipPattern       The skip pattern.
      */
     public TracingVtxHandler(String decoratorClass, String skipPattern) {
         decorators.add(new MiddlewareSpanDecorator());
@@ -193,7 +193,7 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
     /**
      * Remove and return the current active span from the routing context.
      * 
-     * @param routingCtx
+     * @param routingCtx    Vertx routing context object.
      * @return Span
      */
     public static Span removeActiveSpan(RoutingContext routingCtx) {
@@ -207,7 +207,7 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
     /**
      * Return the current span from the routing context.
      * 
-     * @param routingCtx
+     * @param routingCtx    Vertx routing context object.
      * @return Span
      */
     public static Span activeSpan(RoutingContext routingCtx) {
@@ -221,7 +221,7 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
     /**
      * Return the current scope from the routing context.
      * 
-     * @param routingCtx
+     * @param routingCtx    Vertx routing context object.
      * @return Span
      */
     public static OTLAsyncScope scope(RoutingContext routingCtx) {
@@ -233,7 +233,7 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
      * be added after {@code StandardFilterSpanDecorator} and
      * platform provided decorator {@code FilterSpanDecorator}.
      *
-     * @param decoratorClass Custom decorator class.
+     * @param decoratorClass    Custom decorator class.
      * @return FilterSpanDecorator
      */
     private RequestCtxDecorator initDecorator(String decoratorClass) {
@@ -243,8 +243,7 @@ public class TracingVtxHandler implements Handler<RoutingContext> {
     /**
      * Check if the current URL path needs to be traced.
      * 
-     * @param request
-     * @param response
+     * @param routingCtx    Vertx routing context object.
      * @return boolean
      */
     private boolean isTraceable(RoutingContext routingCtx) {

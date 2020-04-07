@@ -26,8 +26,8 @@ import io.vertx.core.http.HttpServerResponse;
  * 
  * Decorating a span implies adding additional info about the span. Eventually 
  * they get stored as a tag.
- * Note that it is not mandatory to provide a span decorator. The {@link OTLVertxHandler}
- * by default includes the {@link StandardVertxMiddlewareSpanDecorator}, which takes most
+ * Note that it is not mandatory to provide a span decorator. The {@link TracingVtxHandler}
+ * by default includes the {@link MiddlewareSpanDecorator}, which takes most
  * of the responsibility of decorating the newly created span.
  *
  * @author Sudiptasish Chanda

@@ -32,24 +32,24 @@ public interface MetricAdapter {
     /**
      * Update the underlying tracer metric.
      * 
-     * @param type
-     * @param arg
+     * @param type  The event type.
+     * @param arg   event argument,
      */
     void updateTracerMetric(EventType type, Object arg);
     
     /**
      * Update the underlying span metric.
      * 
-     * @param type
-     * @param arg
+     * @param type  The event type.
+     * @param arg   event argument,
      */
     void updateSpanMetric(EventType type, Object arg);
     
     /**
      * Update the underlying scope metric.
      * 
-     * @param type
-     * @param arg
+     * @param type  The event type.
+     * @param arg   event argument,
      */
     void updateScopeMetric(EventType type, Object arg);
 }

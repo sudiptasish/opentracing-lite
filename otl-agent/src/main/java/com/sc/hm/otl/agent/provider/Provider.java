@@ -34,7 +34,6 @@ public abstract class Provider {
      * The algorithm used to locate the provider subclass to use consists
      * of the following steps:
      * 
-     * <p>
      * <ul>
      * <li>
      *   If a resource with the name of
@@ -62,7 +61,9 @@ public abstract class Provider {
      * If multiple providers were found, then take the first one present in the
      * classpath.
      * 
-     * @param refresh
+     * @param refresh   Specify whether a refresh is required.
+     *                  If true, then the service loader will try loading the
+     *                  the available provider factories again.
      * @return Provider
      */
     public static Provider provider(boolean refresh) {

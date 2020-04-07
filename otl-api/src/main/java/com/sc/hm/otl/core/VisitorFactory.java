@@ -42,7 +42,7 @@ public abstract class VisitorFactory {
      * Note that, {@link OTLSpanVisitor} is stateless, that means, it does not
      * maintain any state, which is why it is thread safe.
      * 
-     * @return 
+     * @return OTLSpanVisitor
      */
     public abstract OTLSpanVisitor getVisitor();
 }

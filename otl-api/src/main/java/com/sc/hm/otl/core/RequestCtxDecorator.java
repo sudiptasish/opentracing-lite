@@ -58,7 +58,7 @@ public interface RequestCtxDecorator<R, S> {
      * called service.
      * 
      * <p>
-     * Like {@link #onSend} method, it is expected that the underlying messaginng
+     * Like {@link #onRequest} method, it is expected that the underlying messaginng
      * infrastructure will pass on some context data in order to enrich the span.
      * 
      * @param request   Platform specific request object

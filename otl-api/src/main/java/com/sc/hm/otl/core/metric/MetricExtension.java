@@ -16,6 +16,8 @@
 package com.sc.hm.otl.core.metric;
 
 import io.opentracing.Span;
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
 
 /**
  * This class hides and serves as a substitute for the underlying metric sub-system

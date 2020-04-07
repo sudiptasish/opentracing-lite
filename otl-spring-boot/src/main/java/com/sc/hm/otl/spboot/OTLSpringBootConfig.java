@@ -15,7 +15,9 @@
  */
 package com.sc.hm.otl.spboot;
 
+import javax.servlet.annotation.WebFilter;
 import com.sc.hm.otl.spring.client.SpringWebConfig;
+import com.sc.hm.otl.web.filter.FilterSpanDecorator;
 import com.sc.hm.otl.web.filter.TracingWebFilter;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,11 +26,11 @@ import org.springframework.context.annotation.Import;
 /**
  * OTL Spring Boot configuration.
  * 
- * Although the {@link TracingWebFilter} includes the {@link @WebFilter} annotation, and
+ * Although the {@link TracingWebFilter} includes the {@link WebFilter} annotation, and
  * today most of the web server/application server can recognize this annotation
  * and accordingly load the filter. However, spring boot uses the embedded web
  * server (Apache Tomcat). Due to the fact that embedded containers do not support
- * @WebServlet, @WebFilter and @WebListener annotations, Spring Boot, relying greatly
+ * WebServlet, WebFilter and WebListener annotations, Spring Boot, relying greatly
  * on embedded containers, introduced this new annotation @ServletComponentScan to
  * support some dependent jars that use these 3 annotations.
  * 
@@ -37,7 +39,7 @@ import org.springframework.context.annotation.Import;
  * 
  * This annotation will scan the specified package to find and load the OTL filter.
  * It will be initialized with default configuration, which includes the default
- * {@link StandardFilterSpanDecorator} and no skip pattern. The url pattern will be
+ * {@link FilterSpanDecorator} and no skip pattern. The url pattern will be
  * set by spring boot, which is [/*], which means this filter will be invoked for
  * all possible urls.
  *

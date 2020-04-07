@@ -24,7 +24,7 @@ import javax.ws.rs.container.ContainerResponseContext;
 
 /**
  * Interface that represents a span decorator for jax rs.
- * If user decides not to use the {@OTLFilter}, then another option to trap the
+ * If user decides not to use the otl TracingWebFilter, then another option to trap the
  * incoming request is to use a {@link ContainerRequestFilter}. Once the request
  * is intercepted, then this decorator must be used to decorate the newly created
  * span.

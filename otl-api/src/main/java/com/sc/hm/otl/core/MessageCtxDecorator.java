@@ -50,7 +50,7 @@ public interface MessageCtxDecorator<R> {
      * persistent queue. In either case, the span must be decorated before sending
      * it to the queue.
      * 
-     * @param context
+     * @param context   The context object as passed by underlying messaging system.
      * @param span      The span whose contextual information is to be sent to
      *                  the queue. The context data will be part of the message header.
      *                  
@@ -69,7 +69,7 @@ public interface MessageCtxDecorator<R> {
      * Like {@link #onSend} method, it is expected that the underlying messaginng
      * infrastructure will pass on some context data in order to enrich the span.
      * 
-     * @param context
+     * @param context   The context object as passed by underlying messaging system.
      * @param span      The span that is expected to be created by the interceptor
      *                  after extracing the contextual information from the message
      *                  header.

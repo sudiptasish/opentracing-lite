@@ -17,6 +17,7 @@ package com.sc.hm.otl.core.impl;
 
 import com.sc.hm.otl.agent.provider.Provider;
 import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
 import java.util.ServiceLoader;
 
 /**

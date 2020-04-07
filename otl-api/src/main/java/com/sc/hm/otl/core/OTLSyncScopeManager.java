@@ -16,6 +16,7 @@
 package com.sc.hm.otl.core;
 
 import io.opentracing.ScopeManager;
+import io.opentracing.Scope;
 
 /**
  * The OTL scope manager interface that extend the opentracing {@link ScopeManager}.

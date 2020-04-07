@@ -45,9 +45,10 @@ public interface OTLTracer extends Tracer {
 
     /**
      * Activate the span in an async environment.
+     * This method is not being used currently. It is kept for future use.
      * 
-     * @param span
-     * @return 
+     * @param span  The span to be actived.
+     * @return Scope
      */
     Scope activateAsync(Span span);
     
@@ -91,7 +92,7 @@ public interface OTLTracer extends Tracer {
      *   
      * </code></pre>
      * 
-     * @param context
+     * @param context       The span context 
      * @return SpanBuilder
      */
     Tracer.SpanBuilder resumeSpan(SpanContext context);

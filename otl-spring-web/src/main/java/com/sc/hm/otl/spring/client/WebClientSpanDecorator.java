@@ -31,9 +31,10 @@ import org.springframework.web.reactive.function.client.ClientRequest;
 public interface WebClientSpanDecorator {
     
     /**
+     * This API will be invoked just before sending the response to next service.
      * 
-     * @param request
-     * @param span 
+     * @param request   The request object
+     * @param span      The span created by the interceptor component.
      */
     void onRequest(ClientRequest request, Span span);
 }

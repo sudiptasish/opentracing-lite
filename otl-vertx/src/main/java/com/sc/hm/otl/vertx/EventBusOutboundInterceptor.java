@@ -54,7 +54,6 @@ import org.slf4j.LoggerFactory;
  *  
  *  ....
  * 
- *  @Override
  *  public void handle(RoutingContext routingCtx) {
  *      Object message = ...
  *      String address = ...;
@@ -83,7 +82,7 @@ import org.slf4j.LoggerFactory;
  * which case, the consumer must take care of closing the span as appropriate.
  * 
  * Note: For distributed event bus, span creation during message delivery can be
- *       enabled by setting the system property <code>-Dvertx.eventbus.span<code>
+ *       enabled by setting the system property <code>-Dvertx.eventbus.span</code>
  *       to true.
  *
  * @author Sudiptasish Chanda

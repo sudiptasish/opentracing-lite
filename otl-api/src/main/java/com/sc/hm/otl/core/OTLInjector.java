@@ -33,7 +33,8 @@ public interface OTLInjector<C> {
      * It will call {@link #inject(OTLSpanContext, Object) } after taking the 
      * active span from the current thread context.
      * 
-     * @param carrier 
+     * @param carrier   The carrier object where the current contextual info
+     *                  will be injected.
      */
     void inject(C carrier);
     
@@ -41,8 +42,9 @@ public interface OTLInjector<C> {
      * Take the tracing details from the spancontext provided and push them into
      * the carrier, which is tied to the outbound request.
      * 
-     * @param context
-     * @param carrier 
+     * @param context   Current span context.
+     * @param carrier   The carrier object where the current contextual info
+     *                  will be injected.
      */
     void inject(OTLSpanContext context, C carrier);
 }

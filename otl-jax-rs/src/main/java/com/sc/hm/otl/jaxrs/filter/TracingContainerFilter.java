@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * As per jax-rs specification, there are three ways to intercept/filter the incoming
- * request: one by using the standard servlet filter, {@link OTLFilter}, secondly,
+ * request: one by using the standard servlet filter, TracingWebFilter, secondly,
  * by creating a {@link ContainerRequestFilter}, and finally, by creating a {@link WriterInterceptor}.
  * 
  * <p>
@@ -56,12 +56,12 @@ import org.slf4j.LoggerFactory;
  * <p>
  * The request filter can either be added in the <code>web.xml</code> file, or via
  * {@link Provider} annotation. Here we are skipping the provider annotation, in
- * case user wants to use the {@link OTLFilter} by specifying the same in the <code>web.xml</code>.
+ * case user wants to use the TracingWebFilter by specifying the same in the <code>web.xml</code>.
  * 
  * Note that, Providers are a simply a way of extending and customizing the JAX-RS
  * runtime. You can think of them as plugins that (potentially) alter the behavior
  * of the runtime, in order to accomplish a set of (program defined) goals. If this
- * class is annotated with {@link Provider}, and the {@link OTLFilter} is also added
+ * class is annotated with {@link Provider}, and the TracingWebFilter is also added
  * to the web.xml, then multiple span will be created for the same request. Hence, it
  * is recommended to add the {@link TracingContainerFilter} in the <code>web.xml</code>.
  * 

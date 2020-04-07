@@ -59,7 +59,7 @@ public interface OTLAsyncScope extends Scope {
      * An async scope may contain multiple spans. Thew new span will be added top
      * of the internal stack, marking it active.
      * 
-     * @param span 
+     * @param span  The span to be added to this async scope.
      */
     void add(Span span);
     
@@ -67,19 +67,20 @@ public interface OTLAsyncScope extends Scope {
      * Return the currently active span.
      * It basically returns the most recent span created.
      * 
-     * @return Span
+     * @return Span The currently active span,means teh topo most element of
+     *              the stack.
      */
     Span active();
     
     /**
      * Remove and return the current span from this scope.
-     * @return Span
+     * @return Span Return the currently active span.
      */
     Span removeCurrent();
     
     /**
      * Return the total number of un-finished spans present in this scope.
-     * @return int
+     * @return int  Total number of spans present in this async scope.
      */
     int spanCount();
 }

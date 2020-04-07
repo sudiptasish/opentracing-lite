@@ -24,6 +24,7 @@ import io.opentracing.util.GlobalTracer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.client.ClientResponseContext;
@@ -57,13 +58,13 @@ import org.slf4j.LoggerFactory;
  * The client request filter will always create a new span to pass the newly
  * created span context (namely the traceId, spanId and the baggage items, if any)
  * to the next service on the chain. The same span would then be closed later by
- * the {@link OTLClientResponseFilter} once it receives the response from the 
+ * the {@link TracingClientFilter} once it receives the response from the 
  * remote service. User, however, can override the default
  * behavior by specifying the system property <code>-Djax.rs.span</code> 
  * as false. In which case, no new span will be created, but only the contextual
  * data will be passed.
  * 
- * The filter has to be explicitly registered with the {@lick Client} first.
+ * The filter has to be explicitly registered with the {@link Client} first.
  * Example:
  * 
  * <pre>
@@ -88,7 +89,7 @@ import org.slf4j.LoggerFactory;
  }
  * </pre>
  * 
- * You can also register the request filter via {@link ClientConfig} as a provider
+ * You can also register the request filter via ClientConfig as a provider
  * and use it like below:
  * 
  * <pre>

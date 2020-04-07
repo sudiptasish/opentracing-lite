@@ -15,7 +15,10 @@
  */
 package com.sc.hm.otl.metrics.mbean;
 
+import io.opentracing.Span;
+
 /**
+ * Interface for span mbean.
  *
  * @author Sudiptasish Chanda
  */
@@ -43,7 +46,7 @@ public interface SpanMXBean {
     
     /**
      * Return the longest duration that a span took to complete.
-     * This API will consider only those spans, for which the {@link Span#finish}
+     * This API will consider only those spans, for which the {@link Span#finish() }
      * method had already been invoked.
      * 
      * @return Long

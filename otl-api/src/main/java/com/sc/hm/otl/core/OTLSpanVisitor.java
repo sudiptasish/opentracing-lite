@@ -34,8 +34,8 @@ public interface OTLSpanVisitor {
      * the span and dispatched to specific destination.
      * The destination could be in memory, standard console or file.
      * 
-     * @param span
-     * @param param 
+     * @param span      The span object to be visited.
+     * @param param     Callback argument.
      */
     void visit(OTLSpan span, Object param);
 }

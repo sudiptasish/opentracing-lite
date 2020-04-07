@@ -16,6 +16,7 @@
 package com.sc.hm.otl.web.ctx;
 
 import com.sc.hm.otl.util.OTLConstants;
+import com.sc.hm.otl.web.filter.FilterSpanDecorator;
 import com.sc.hm.otl.web.filter.TracingWebFilter;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
@@ -59,10 +60,10 @@ import org.slf4j.LoggerFactory;
  * }
  * </pre>
  * 
- * This will initialize the OTLServletContextListener, which in turn will help
+ * This will initialize the otl ServletContextListener, which in turn will help
  * register the {@link TracingWebFilter} with default configuration. In default mode, the
  * filter won't have any skip pattern, and use only the platform provided decorator
- * {@link StandardFilterSpanDecorator}.
+ * {@link FilterSpanDecorator}.
  * 
  * You can, however, provide a skip pattern and a custom decorator to the filter by
  * specifying them in the <code>context-param</code> tag.

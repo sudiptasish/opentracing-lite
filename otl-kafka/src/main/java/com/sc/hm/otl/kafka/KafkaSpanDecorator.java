@@ -29,16 +29,16 @@ public interface KafkaSpanDecorator {
     /**
      * This API will be called to decorate the newly created span.
      * 
-     * @param record
-     * @param span 
+     * @param record    The record being sent
+     * @param span      The current span created by the producer interceptor
      */
     void onSend(ProducerRecord<Object, Object> record, Span span);
     
     /**
      * This API will be called to decorate the newly created span by the consumer.
      * 
-     * @param record
-     * @param span 
+     * @param record    The record received from the broker
+     * @param span      The span created by the consumer interceptor
      */
     <K, V> void onReceive(ConsumerRecord<K, V> record, Span span);
 }

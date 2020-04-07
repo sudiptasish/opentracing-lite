@@ -53,7 +53,7 @@ public final class OTLContext {
     
     /**
      * Put a context value as identified with the key parameter into the current
-     * thread's diagnostic context map. The key</code> parameter cannot be null.
+     * thread's diagnostic context map. The <code>key</code> parameter cannot be null.
      * The parameter, however, can be null only if the underlying implementation supports it.
      *
      * @param key non-null key 

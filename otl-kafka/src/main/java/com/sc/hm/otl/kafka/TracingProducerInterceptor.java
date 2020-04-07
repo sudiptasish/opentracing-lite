@@ -78,12 +78,11 @@ import org.slf4j.LoggerFactory;
  * and the relationship would FOLLOWS_FROM as opposed to CHILD_OF.
  * 
  * You can, however, disable this feature by setting the system property 
- * <pre>-Dkafka.producer.span<pre> to false. In which case, it will check if any
+ * <pre>-Dkafka.producer.span</pre> to false. In which case, it will check if any
  * span exists in the current thread context, if so, then helps propagate the span
  * context to the broker. Such that any consumer running other side would eventually
  * receive the same span.
  * 
- * <p>
  * Note that, prior 0.8.0 there was no concept of a message header. So if you are
  * on 0.8.0, upgrade you kafka client to the latest version.
  *

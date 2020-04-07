@@ -33,28 +33,29 @@ public interface ContextAdapter {
     /**
      * Set the specified key, value pair in the current thread's context.
      * 
-     * @param key
-     * @param value 
+     * @param key   The key
+     * @param value Corresponding value
      */
     void put(String key, String value);
     
     /**
      * Replace the current thread context with the new map.
-     * @param ctxMap 
+     * @param ctxMap The context map to be placed in the context.
      */
     void put(Map<String, String> ctxMap);
     
     /**
+     * Return the context value corresponding to the key.
      * 
-     * @param key
-     * @return 
+     * @param key   The key whose corresponding value to be retrieved.
+     * @return String
      */
     String get(String key);
     
     /**
+     * Remove the context data associated with this key.
      * 
-     * 
-     * @param key 
+     * @param key context key.
      */
     void remove(String key);
     

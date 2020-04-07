@@ -43,10 +43,12 @@ import org.springframework.web.client.RestTemplate;
  * <p>
  * As of today, the following headers will be injected:
  * 
+ * <ul>
  * <li>X-B3-TraceId</li>
  * <li>X-B3-SpanId</li>
  * <li>X-B3-Sampled</li>
- * <li>X-B3-Baggage-<key></li>
+ * <li>X-B3-Baggage-{key}</li>
+ * </ul>
  * 
  * If there is an active span in the current thread context, then this above 
  * information will be extracted from the span and injected into the {@link HttpRequest}
@@ -63,10 +65,10 @@ import org.springframework.web.client.RestTemplate;
  * be closed.
  * 
  * The interceptor of a RestTemplate is added via the custom bean post processor,
- * provided the rest template is created via traditional @Bean API.
+ * provided the rest template is created via traditional Bean API.
  * <pre>
  * {@code 
- *     @Bean
+ *     
  *     public RestTemplate defaultRestTemplate() {
  *         return new RestTemplate(); 
  *     }
@@ -78,7 +80,7 @@ import org.springframework.web.client.RestTemplate;
  * 
  * <p>
  * Caution: The following code will never add the interceptor, and thus should be
- * avoided. Note that spring {@link RestTemplate) is thread safe. This means, for 
+ * avoided. Note that spring {@link RestTemplate} is thread safe. This means, for 
  * instance, that the RestTemplate should be constructed only once and reused.
  * You can also use callbacks to customize its operations.
  * 
