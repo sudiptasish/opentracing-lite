@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sc.hm.otl.util;
+package io.opns.otl.util;
 
+import io.opns.otl.util.TracingUtility;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

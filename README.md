@@ -81,7 +81,7 @@ Imagine you have a standalone java application, that uses SLF4J compliant logger
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
-    <groupId>com.sc.hm</groupId>
+    <groupId>io.opns./groupId>
     <artifactId>test_app</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -94,12 +94,12 @@ Imagine you have a standalone java application, that uses SLF4J compliant logger
     
     <dependencies>
         <dependency>
-            <groupId>com.sc.hm.otl</groupId>
+            <groupId>io.opns.otl</groupId>
             <artifactId>otl-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.sc.hm.otl</groupId>
+            <groupId>io.opns.otl</groupId>
             <artifactId>otl-slf4j</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -301,17 +301,17 @@ mvn dependency:build-classpath
 Run:
 
 ```
-java -javaagent:/path/to/otl-agent-1.0-SNAPSHOT.jar -classpath <classpath_entries> com.sc.hm.test_app.Registration
+java -javaagent:/path/to/otl-agent-1.0-SNAPSHOT.jar -classpath <classpath_entries> io.opns.test_app.Registration
 
 ```
 
 CONSOLE Log:
 
 ```
-2020-04-03_02:00:26.232 [main] [] [] [] [] 122   INFO  com.sc.hm.test_app.Registration - Starting employee registration 
-2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [EPAJ2GPdfTccdK92] [0lSiHNkZMIHygAvm] [] 174   INFO  com.sc.hm.test_app.Registration - Employee created successfully 
-2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [zD5KhTynBuBW8dEP] [EPAJ2GPdfTccdK92] [] 174   INFO  com.sc.hm.test_app.Registration - Department created successfully 
-2020-04-03_02:00:26.286 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [0lSiHNkZMIHygAvm] [] [] 176   INFO  com.sc.hm.test_app.Registration - Employee registration is complete
+2020-04-03_02:00:26.232 [main] [] [] [] [] 122   INFO  io.opns.test_app.Registration - Starting employee registration 
+2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [EPAJ2GPdfTccdK92] [0lSiHNkZMIHygAvm] [] 174   INFO  io.opns.test_app.Registration - Employee created successfully 
+2020-04-03_02:00:26.284 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [zD5KhTynBuBW8dEP] [EPAJ2GPdfTccdK92] [] 174   INFO  io.opns.test_app.Registration - Department created successfully 
+2020-04-03_02:00:26.286 [main] [4EtY9Q32NnFPKnwpuPbuKBmPFoVA97gC] [0lSiHNkZMIHygAvm] [] [] 176   INFO  io.opns.test_app.Registration - Employee registration is complete
 
 ```
 

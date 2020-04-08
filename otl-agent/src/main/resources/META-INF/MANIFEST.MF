@@ -1,5 +1,5 @@
-Premain-Class: com.sc.hm.otl.agent.OTLAgent
-Agent-Class: com.sc.hm.otl.agent.OTLAgent
+Premain-Class: io.opns.otl.agent.OTLAgent
+Agent-Class: io.opns.otl.agent.OTLAgent
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
 Can-Set-Native-Method-Prefix: true

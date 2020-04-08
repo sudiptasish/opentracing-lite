@@ -16,13 +16,13 @@ Add the following dependency in your pom file:
 <dependencies>
     ....
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-web</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!--  Add the below, only if you want to monitor the span metrics -->
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
@@ -43,7 +43,7 @@ public Producer createProducer() {
     config.put(ProducerConfig.CLIENT_ID_CONFIG, "Producer-1");
     ....
     ....
-    config.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.sc.hm.otl.kafka.OTLKafkaProducerInterceptor");
+    config.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "io.opns.otl.kafka.OTLKafkaProducerInterceptor");
     producer = new KafkaProducer<String, T>(config);
     return producer
 }
@@ -72,7 +72,7 @@ public Consumer createConsumer() {
          ....
          ....
     config.put(ConsumerConfig.INTERCEPTOR_CLASSES_CONFIG
-        , "com.sc.hm.otl.kafka.OTLKafkaConsumerInterceptor");
+        , "io.opns.otl.kafka.OTLKafkaConsumerInterceptor");
   
     consumer = new KafkaConsumer<String, byte[]>(config);
     return consumer

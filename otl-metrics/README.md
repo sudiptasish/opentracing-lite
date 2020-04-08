@@ -29,7 +29,7 @@ Include the otl-metrics library in your pom file. The OTL framework will automat
 ```
 <dependencies>
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>

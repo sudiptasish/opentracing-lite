@@ -8,7 +8,7 @@
     
     <servlet>
         <filter-name>OTLFilter</filter-name>
-        <filter-class>com.sc.hm.otl.web.filter.OTLFilter</filter-class>
+        <filter-class>io.opns.otl.web.filter.OTLFilter</filter-class>
         <load-on-startup>1</load-on-startup>
     </filter>
     <filter-mapping>
@@ -21,15 +21,15 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.sc.hm.otl.integ</param-value>
+            <param-value>io.opns.otl.integ</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.sc.hm.otl.jaxrs.filter.OTLRequestFilter</param-value>
+            <param-value>io.opns.otl.jaxrs.filter.OTLRequestFilter</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.sc.hm.otl.jaxrs.filter.OTLResponseFilter</param-value>
+            <param-value>io.opns.otl.jaxrs.filter.OTLResponseFilter</param-value>
         </init-param>
         <init-param>  
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>  

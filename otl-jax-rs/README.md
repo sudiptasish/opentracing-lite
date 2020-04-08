@@ -12,13 +12,13 @@ Because any Jax-rs implementation is a server side containerized application, it
 <dependencies>
     ....
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-jax-rs</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!--  Add the below, only if you want to monitor the span metrics -->
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
@@ -36,7 +36,7 @@ Using web.xml
     .....
     <filter>
         <filter-name>OpenTracingFilter</filter-name>
-        <filter-class>com.sc.hm.otl.web.filter.OTLFilter</filter-class>
+        <filter-class>io.opns.otl.web.filter.OTLFilter</filter-class>
         <load-on-startup>1</load-on-startup>
         
         <init-param>
@@ -68,15 +68,15 @@ If you are using jersey/resteasy or any other as jax-rs implementation, then you
         <servlet-class>Jax.Rs.Servlet.Name</servlet-class>  
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.sc.hm.otl.jaxrs.filter.OTLRequestFilter</param-value>
+            <param-value>io.opns.otl.jaxrs.filter.OTLRequestFilter</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.sc.hm.otl.jaxrs.filter.OTLResponseFilter</param-value>
+            <param-value>io.opns.otl.jaxrs.filter.OTLResponseFilter</param-value>
         </init-param>
         <init-param>  
             <param-name>jersey.config.server.provider.packages</param-name>  
-            <param-value>com.sc.hm.otl.jaxrs.filter,package.name.for.other.rest.classes</param-value>  
+            <param-value>io.opns.otl.jaxrs.filter,package.name.for.other.rest.classes</param-value>  
         </init-param>  
         <init-param>  
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>  

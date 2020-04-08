@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>opentracing-lite</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.sc.hm.otl</groupId>
+    <groupId>io.opns.otl</groupId>
     <artifactId>otl-agent</artifactId>
     <version>1.0-SNAPSHOT</version>
     

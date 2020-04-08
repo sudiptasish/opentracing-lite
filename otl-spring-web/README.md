@@ -82,13 +82,13 @@ public void createEmployee() {
 <dependencies>
     ....
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-spring-web</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!--  Add the below, only if you want to monitor the span metrics -->
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>

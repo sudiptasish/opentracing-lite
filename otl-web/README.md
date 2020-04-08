@@ -18,13 +18,13 @@ Configuring OTLFilter is easy. Note that, it is a conventional http servlet filt
 <dependencies>
     ....
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-web</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!--  Add the below, only if you want to monitor the span metrics -->
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
@@ -42,7 +42,7 @@ There are two ways to configure the OTL Web Filter.
     .....
     <filter>
         <filter-name>OpenTracingFilter</filter-name>
-        <filter-class>com.sc.hm.otl.web.filter.OTLFilter</filter-class>
+        <filter-class>io.opns.otl.web.filter.OTLFilter</filter-class>
         <load-on-startup>1</load-on-startup>
         
         <init-param>
@@ -79,7 +79,7 @@ Some project may want to initialize the Filter dynamically. In which case you ca
     </context-param>
     .....
     <listener>
-        <listener-class>com.sc.hm.otl.web.ctx.OTLServletContextListener</listener-class>
+        <listener-class>io.opns.otl.web.ctx.OTLServletContextListener</listener-class>
     </listener>
     .....
     .....

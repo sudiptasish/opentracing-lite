@@ -1,0 +1,1 @@
+mvn install:install-file -DgroupId=io.opns.otl -DartifactId=otl-agent -Dversion=v0.1-alpha -Dpackaging=jar -Dfile=target/otl-agent-1.0-SNAPSHOT.jar -DlocalRepositoryPath=../binary

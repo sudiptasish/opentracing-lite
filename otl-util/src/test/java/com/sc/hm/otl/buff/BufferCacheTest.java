@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sc.hm.otl.buff;
+package io.opns.otl.buff;
 
+import io.opns.otl.buff.LogBuffer;
+import io.opns.otl.buff.BufferCache;
 import java.util.concurrent.CountDownLatch;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

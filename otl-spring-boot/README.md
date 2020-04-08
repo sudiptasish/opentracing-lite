@@ -15,13 +15,13 @@ Add the following dependecies:
 ```
 <dependencies>
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-spring-boot</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
     <!-- Add otl-metrics only if you wish to capture the span metrics -->
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-metrics</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>

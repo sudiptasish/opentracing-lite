@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sc.hm.otl.buff;
+package io.opns.otl.buff;
 
+import io.opns.otl.buff.LogBuffer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

@@ -12,7 +12,7 @@ This module contains the necessary adapter to forward the logging call to underl
 <dependencies>
     ....
     <dependency>
-        <groupId>com.sc.hm.otl</groupId>
+        <groupId>io.opns.otl</groupId>
         <artifactId>otl-slf4j</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
