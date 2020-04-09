@@ -18,14 +18,16 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-        server-id: ${{ secrets.ServerId }} # Value of the distributionManagement/repository/id field of the pom.xml
+        server-id: SERVER_ID # Value of the distributionManagement/repository/id field of the pom.xml
+        server-username: SERVER_USERNAME
+        server-password: SERVER_PASSWORD
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn -e -X deploy -DskipTests -Dgpg.skip -s settings.xml
+      run: mvn -e -X deploy -DskipTests -Dgpg.skip -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
         SERVER_ID: ${{ secrets.ServerId }}
