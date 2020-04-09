@@ -28,13 +28,7 @@ jobs:
       
     - name: Get tag
       id: get_tag
-      run: echo "::set-output name=tag_name::${GITHUB_REF:11}"
+      run: echo ::set-output name=tag_name::${GITHUB_REF:11}
       
     - name: Bump version
-      run: mvn versions:set -DnewVersion=steps.get_tag.outputs.tag_name
-
-    - name: Publish to Apache Maven Central
-      run: mvn -B -e -X deploy -DskipTests -Dgpg.skip -s $GITHUB_WORKSPACE/settings.xml 
-      env:
-        SERVER_USERNAME: ${{ secrets.ServerUser }}
-        SERVER_PASSWORD: ${{ secrets.ServerPassword }}
+      run: mvn versions:set -DnewVersion=${{ steps.get_tag.outputs.tag_name }}
