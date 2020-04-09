@@ -32,3 +32,9 @@ jobs:
       
     - name: Bump version
       run: mvn versions:set -DnewVersion=${{ steps.get_tag.outputs.tag_name }}
+  
+    - name: Publish to Apache Maven Central
+      run: mvn -B -e -X deploy -DskipTests -Dgpg.skip -s $GITHUB_WORKSPACE/settings.xml 
+      env:
+        SERVER_USERNAME: ${{ secrets.ServerUser }}
+        SERVER_PASSWORD: ${{ secrets.ServerPassword }}
