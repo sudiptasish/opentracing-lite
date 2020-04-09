@@ -42,6 +42,20 @@
         <url>https://github.com/sudiptasish/opentracing-lite/tree/master</url>
     </scm>
     
+    <!--
+    If you are using the Maven deploy plugin, which is the default behavior, you
+    need to add a full distributionManagement section.
+    This configurations will get the user account details to deploy to OSSRH from
+    the Maven settings.xml file
+    
+    In github, the settings.xml file will be overriden and a new file will be created
+    under the current workspace directory, after taking the username and password
+    from the secrets.
+    
+    The id element in the server element in settings.xml should be identical to the
+    id elements in the snapshotRepository and repository element as well as the 
+    serverId configuration of the Nexus Staging Maven plugin
+    -->
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -79,6 +93,26 @@
     
     <build>
         <plugins>
+            <!-- 
+            The Nexus Staging Maven Plugin is the recommended way to deploy
+            your components to OSSRH and release them to the Central Repository.
+            
+            If your version is a release version (does not end in -SNAPSHOT) and
+            with this setup in place, you can run a deployment to OSSRH and an 
+            automated release to the Central Repository with the usual:
+            
+            mvn clean deploy
+            
+            If the property autoReleaseAfterClose set to false you can manually 
+            inspect the staging repository in the Nexus Repository Manager and
+            trigger a release of the staging repository later with:
+            
+            mvn nexus-staging:release
+            
+            If something goes wrong you can drop the staging repository with:
+            
+            mvn nexus-staging:drop
+            -->
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -87,7 +121,7 @@
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
             <plugin>
@@ -115,6 +149,17 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
