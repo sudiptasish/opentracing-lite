@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-        server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
+        server-id: ${{ secrets.ServerId }} # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
@@ -28,3 +28,6 @@ jobs:
       run: mvn deploy -Dgpg.skip -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        SERVER_ID:  ${{ secrets.ServerId }}
+        SERVER_USERNAME:  ${{ secrets.ServerUser }}
+        SERVER_PASSWORD:  ${{ secrets.ServerPassword }}
