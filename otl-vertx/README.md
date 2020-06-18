@@ -68,7 +68,7 @@ public void start() throws Exception {
 
 ## Eventbus
 
-Add the eventbus interceptor. Here is the same example, but teh eventbus interceptor is added.
+Add the eventbus interceptor. Here is the same example, but the eventbus interceptor is added.
 
 ```
 @Override
@@ -113,7 +113,7 @@ public void sendToEventbus(RoutingContext ctx, String destAddress, Object payloa
 
 Note 1: The eventbus API invocation must happen within the **try-with-resources** block. Otherwise no context data will be propagated to the verticle/consumer on the other side. In case the consumer responds using ```Meesage.reply(...)```, the same outbound interceptor will be invoked.
 
-Note 2: interceptor does not create a new span. Because an application which heavily relies on the event bus, it will be flooded with spans. Hence the span creation is disabled. It will only propagate the span context data from one verticle to another. The 2nd verticle may decide to start a new span to represent it's own work. If the event bus is distributed, then the span creation will b eenabled. You can, however, control the behavior by tweaking the system property "-Dvertx.eventbus.span". It's default value is "false"
+Note 2: interceptor does not create a new span. Because an application which heavily relies on the event bus, it will be flooded with spans. Hence the span creation is disabled. It will only propagate the span context data from one verticle to another. The 2nd verticle may decide to start a new span to represent it's own work. If the event bus is distributed, then the span creation will be enabled. You can, however, control the behavior by tweaking the system property "-Dvertx.eventbus.span". It's default value is "false"
 
 ## Web Client
 
