@@ -93,11 +93,11 @@ import org.slf4j.LoggerFactory;
  *
  *         <init-param>
  *              <param-name>DECORATOR</param-name>
- *              <param-value>fully_qualified_class_name_of_custom_decorator</param-value>
+ *              <param-value>decorator.class</param-value>
  *          </init-param>
  *          <init-param>
  *              <param-name>SKIP_PATTERN</param-name>
- *              <param-value>pattern_regular_exp</param-value>
+ *              <param-value>uri.pattern|reg.exp</param-value>
  *          </init-param>
  *     </filter>
  *     .....
@@ -113,7 +113,7 @@ import org.slf4j.LoggerFactory;
  *     .....
  *     <filter-mapping>
  *         <filter-name>TracingWebFilter</filter-name>
- *         <url-pattern>url_pattern</url-pattern>
+ *         <url-pattern>url.pattern</url-pattern>
  *     </filter-mapping>
  *     .....
  * </web-app>
