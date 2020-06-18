@@ -47,11 +47,11 @@ There are two ways to configure the OTL Web Filter.
         
         <init-param>
             <param-name>DECORATOR</param-name>
-             <param-value>fully_qualified_class_name_of_custom_decorator</param-value>
+             <param-value>decorator.class.name</param-value>
          </init-param>
          <init-param>
              <param-name>SKIP_PATTERN</param-name>
-             <param-value>pattern_regular_exp</param-value>
+             <param-value>uri.pattern|reg.exp</param-value>
          </init-param>
    </filter>
     .....
@@ -71,11 +71,11 @@ Some project may want to initialize the Filter dynamically. In which case you ca
     .....
     <context-param>
         <param-name>DECORATOR</param-name>
-        <param-value>fully_qualified_class_name_of_custom_decorator</param-value>
+        <param-value>decorator.class.name</param-value>
     </context-param>
     <context-param>
         <param-name>SKIP_PATTERN</param-name>
-        <param-value>pattern_regular_exp</param-value>
+        <param-value>uri.pattern|reg.exp</param-value>
     </context-param>
     .....
     <listener>
